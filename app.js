@@ -7,7 +7,6 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
 const flash = require('req-flash');
-const multer = require('multer');
 const csv = require("fast-csv");
 
 // Definisikan views engine dan format penampil HTML
@@ -20,14 +19,18 @@ app.set('view engine', 'ejs');
 //Deklarasikan folder folder pendukung
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'modelController')));
+app.use(express.static(path.join(__dirname, 'modelController/data')));
 app.use(express.static(path.join(__dirname, 'middleware')));
 app.use(express.static(path.join(__dirname, 'configs')));
+app.use(express.static(path.join(__dirname, 'routes')));
 
 // Configurasi dan gunakan library
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(flash());
 app.use(authMiddleware);
 
+//Konfigurasi Session Login
 app.use(session({
     resave: false,
     saveUninitialized: false,
@@ -38,12 +41,6 @@ app.use(session({
         maxAge: 1*60*60*24*7*1000
     },
 }));
-
-
-
-app.get('/', (req, res) => {
-    res.send('Kontol');
-})
 
 app.listen(PORT, () => {
     console.log('konek')
