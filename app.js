@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const PORT = 1214;
 const path = require('path');
-const authMiddleware = require('./middlewares/authMiddleware');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const flash = require('req-flash');
@@ -19,7 +18,6 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'modelController')));
 app.use(express.static(path.join(__dirname, 'modelController/data')));
-app.use(express.static(path.join(__dirname, 'middleware')));
 app.use(express.static(path.join(__dirname, 'configs')));
 app.use(express.static(path.join(__dirname, 'routes')));
 
