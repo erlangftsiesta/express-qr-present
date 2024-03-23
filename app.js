@@ -5,7 +5,6 @@ const path = require('path');
 const authMiddleware = require('./middlewares/authMiddleware');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const path = require('path');
 const flash = require('req-flash');
 const csv = require("fast-csv");
 
