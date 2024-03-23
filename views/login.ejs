@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="login/auth" method="POST" class="col-md-4 card">
+        <div class="form-group mb-6">
+            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-400" style="color: white;">Username</label>
+            <input type="text" name="username" id="text" placeholder="Masukan Email" class="form-control w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+        </div>
+        <div class="mb-6">
+            <div class="flex justify-between mb-2">
+                <label for="password" class="text-sm text-gray-600 dark:text-gray-400"  style="color: white;">Password</label>
+            </div>
+            <input type="password" name="pass" id="password" placeholder="Masukan Password" class="form-control w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />     
+        </div>
+        <!-- <div class="mb-2">
+        <label for="stats" class="text-sm text-gray-600 dark:text-gray-400"  style="color: white;">Level</label>
+        </div> -->
+        <!-- <div class="mb-6">
+            <div class="flex justify-between mb-2">
+                <label for="status" class="text-sm text-gray-600 dark:text-gray-400"  style="color: white;">Status</label>
+            </div>
+            <input type="status" name="stats" id="stats" placeholder="Masukan Status" class="form-control w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />     
+        </div> -->
+        <select name="stats" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 mb-6" name="level" id="level">
+            <option value="" hidden>Masukan Level</option>
+            <option id="admin" name="stats" value="Admin">Admin</option>
+            <option id="petugas" name="stats" value="Petugas">Petugas</option>
+            <option id="siswa" name="stats" value="Siswa">Siswa</option>
+        </select>
+        <div class="mb-6">
+            <button type="submit" class="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none">Masuk</button>
+        </div>
+        <%if (pesanFlash) { %>
+            <div class="alert alert-<%= colorFlash %> alert-dismissible fade show mt-3" role="alert">
+                <strong><%= statusFlash %></strong> 
+                <%= pesanFlash %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% } %>
+    </form>
+</body>
+</html>

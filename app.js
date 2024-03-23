@@ -7,6 +7,18 @@ const bodyParser = require('body-parser');
 const flash = require('req-flash');
 const csv = require("fast-csv");
 
+//Konfigurasi Session Login
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: 'devacctoRPL',
+    name: 'secretName',
+    cookie: {
+        sameSite: true,
+        maxAge: 1*60*60*24*7*1000
+    },
+}));
+
 // Definisikan views engine dan format penampil HTML
 app.set('views', [
     path.join(__dirname, 'views'),
@@ -26,17 +38,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(flash());
 
-//Konfigurasi Session Login
-app.use(session({
-    resave: false,
-    saveUninitialized: false,
-    secret: 'devacctoRPL',
-    name: 'secretName',
-    cookie: {
-        sameSite: true,
-        maxAge: 1*60*60*24*7*1000
-    },
-}));
+//Konfigurasi file path routing
+const loginRoute = require('./routes/login-router');
+
+//Konfigurasi routes yang telah di deklarasikan
+app.use('/login', loginRoute);
+app.use(flash())
+
+
+app.use(function(req, res, next) {
+    res.setHeader('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    res.setHeader('Pragma', 'no-cache');
+    next();
+});
 
 app.listen(PORT, () => {
     console.log('konek')

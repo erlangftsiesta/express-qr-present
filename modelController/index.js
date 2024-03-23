@@ -1,5 +1,5 @@
+const login = require("./login-controller");
 
-
-module.export = {
-
+module.exports = {
+    login,
 }
