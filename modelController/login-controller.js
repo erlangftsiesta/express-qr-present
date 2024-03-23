@@ -33,10 +33,10 @@ module.exports = {
                         const user = results[0];
                         // Jika data ditemukan, set sesi user tersebut menjadi true
                         req.session.loggedin = true;
-                        req.session.userid = user.id_login;
+                        req.session.id_login = user.id_login;
                         req.session.username = user.username;
                         req.session.status = user.status;
-                        res.redirect('/');
+                        res.redirect('/home');
                     } else {
                         // Jika data tidak ditemukan, set library flash dengan pesan error yang diinginkan
                         req.flash('color', 'danger');
