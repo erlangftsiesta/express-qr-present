@@ -25,7 +25,6 @@ app.use(express.static(path.join(__dirname, 'routes')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(flash());
-app.use(authMiddleware);
 
 //Konfigurasi Session Login
 app.use(session({
