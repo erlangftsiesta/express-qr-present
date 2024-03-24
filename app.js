@@ -28,6 +28,7 @@ app.set('view engine', 'ejs');
 
 //Deklarasikan folder folder pendukung
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/css')));
 app.use(express.static(path.join(__dirname, 'modelController')));
 app.use(express.static(path.join(__dirname, 'middleware')));
 app.use(express.static(path.join(__dirname, 'configs')));
