@@ -61,7 +61,6 @@ module.exports = {
             pool.getConnection(function (err, connection) {
                 if (err) throw err;
                 let query = '';
-                let sessionData = {};
     
                 if (status === 'AKTIF') {
                     query = 'SELECT * FROM login WHERE username = ? AND password = ?';
