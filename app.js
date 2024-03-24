@@ -22,7 +22,7 @@ app.use(session({
 // Definisikan views engine dan format penampil HTML
 app.set('views', [
     path.join(__dirname, 'views'),
-    path.join(__dirname, 'views', 'admin') // Menambahkan path untuk folder 'admin'
+    path.join(__dirname, 'views/admin') // Menambahkan path untuk folder 'admin'
 ]);
 app.set('view engine', 'ejs');
 
@@ -43,11 +43,13 @@ app.use(flash());
 
 //Konfigurasi file path routing
 const loginRoute = require('./routes/login-router');
-const homeRoute = require('./routes/homepage-router')
+const homeRoute = require('./routes/homepage-router');
 
 //Konfigurasi routes yang telah di deklarasikan
 app.use('/login', loginRoute);
-app.use('/', homeRoute)
+
+app.use('/', homeRoute);
+
 app.use(flash())
 
 //==================================================================================================================
