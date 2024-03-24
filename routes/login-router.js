@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const loginController = require('../modelController').login;
-const verifyUser = require('../configs/verify');
+const verifyUser = require('../middleware/verify');
 
 router.get('/', verifyUser.isLogout, loginController.loginPage);
 router.get('/logout', loginController.logout);

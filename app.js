@@ -29,7 +29,7 @@ app.set('view engine', 'ejs');
 //Deklarasikan folder folder pendukung
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'modelController')));
-app.use(express.static(path.join(__dirname, 'modelController/data')));
+app.use(express.static(path.join(__dirname, 'middleware')));
 app.use(express.static(path.join(__dirname, 'configs')));
 app.use(express.static(path.join(__dirname, 'routes')));
 
@@ -38,13 +38,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(flash());
 
+//HANDLE WITH CARE!
+//==================================================================================================================
+
 //Konfigurasi file path routing
 const loginRoute = require('./routes/login-router');
+const homeRoute = require('./routes/homepage-router')
 
 //Konfigurasi routes yang telah di deklarasikan
 app.use('/login', loginRoute);
+app.use('/', homeRoute)
 app.use(flash())
 
+//==================================================================================================================
 
 app.use(function(req, res, next) {
     res.setHeader('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');

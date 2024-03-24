@@ -1,7 +1,7 @@
 const connection = require('../configs/database'); 
 
-let mysql      = require('mysql');
-let pool       = mysql.createPool(connection);
+const mysql      = require('mysql');
+const pool       = mysql.createPool(connection);
 
 pool.on('error',(err)=> {
     console.error(err);
@@ -36,7 +36,7 @@ module.exports = {
                         req.session.id_login = user.id_login;
                         req.session.username = user.username;
                         req.session.status = user.status;
-                        res.redirect('/home');
+                        res.redirect('/');
                     } else {
                         // Jika data tidak ditemukan, set library flash dengan pesan error yang diinginkan
                         req.flash('color', 'danger');
