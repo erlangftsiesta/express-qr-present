@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "tailwindcss build -i ./public/css/input.css -o ./public/css/styleOUT.css",
     "start": "npm run build:css && node app.js",
-    "nodemon": "nodemon -e ejs,js,ts,css --exec yarn start"
+    "nodemon": "nodemon -e ejs,js,ts,css --exec npm run start"
   },
   "keywords": [],
   "author": "",

@@ -43,7 +43,6 @@ const homeRoute = require('./routes/homepage-router');
 
 //Konfigurasi routes yang telah di deklarasikan
 app.use('/login', loginRoute);
-
 app.use('/', homeRoute);
 
 app.use(flash())

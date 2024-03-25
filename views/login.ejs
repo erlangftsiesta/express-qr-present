@@ -10,45 +10,36 @@
 <body>
   <div class="flex h-screen items-center justify-center">
     <div class="w-full max-w-md">
-        <div class="bg-white rounded-xl shadow-md p-6">
+        <div class="bg-violet-700 rounded-xl shadow-xl p-6">
             <div class="flex mb-6">
                 <div class="bg-custom-blue h-8 w-8 flex items-center justify-center rounded-full mr-2">
                     <svg class="text-white h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 15l-3 3 3 3 3-3-3-3"></path>
                     </svg>
                 </div>
-                <div class="text-xl font-semibold text-gray-700">
+                <div class="text-white text-xl font-semibold">
                     Sign in to your account
                 </div>
             </div>
-            <form class="mb-4">
+            <form class="mb-4" action="login/auth" method="POST">
                 <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2" for="username">
+                    <label class="block text-white font-bold mb-2" for="username">
                         Username
                     </label>
-                    <input class="appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 leading-tight focus:outline-none focus:border-gray-500" id="username" type="text">
+                    <input name="username" class="appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 text-white" id="username" type="text">
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2" for="password">
+                    <label class="block text-white font-bold mb-2" for="password">
                         Password
                     </label>
-                    <input class="appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 leading-tight focus:outline-none focus:border-gray-500" id="password" type="password">
+                    <input name="pass" class="appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 text-white" id="password" type="password">
                 </div>
                 <div class=" justify-between mb-2">
-                    <div class="flex items-start flex-col items-start ms-2">
-                        <div>
-                            <input type="checkbox" class="text-custom-blue form-checkbox">
-                            <label class="ml-2 text-gray-700 font-semibold" for="remember">
-                                Remember me
-                            </label>
-                        </div>
-                        <a class="text-sm text-gray-600 hover:text-blue-500" href="#">
-                            Forgot password?
-                        </a>
-                        <a class="text-sm text-gray-600 hover:text-blue-500" href="#">
-                            Register now
-                        </a>
-                    </div>
+                    <select id="underline_select" name="stats" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                        <option>Choose Status</option>
+                        <option name="stats" value="AKTIF" selected>User (AKTIF)</option>
+                        <option name="stats" value="ADMIN">Administrator</option>
+                    </select>
                 </div>
                 <div class="mb-4 bg-indigo-500 text-center">
                     <button class="bg-custom-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
