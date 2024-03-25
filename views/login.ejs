@@ -4,47 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../public/css/styleOUT.css">
-    <link rel="stylesheet" href="../public/css/input.css">
+    <link rel="stylesheet" href="/css/styleOUT.css">
+    <link rel="stylesheet" href="/css/input.css">
 </head>
 <body>
-    <form action="login/auth" method="POST" class="col-md-4 card">
-        <div class="form-group mb-6">
-            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-400" style="color: white;">Username</label>
-            <input type="text" name="username" id="text" placeholder="Masukan Email" class="form-control w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
-        </div>
-        <div class="mb-6">
-            <div class="flex justify-between mb-2">
-                <label for="password" class="text-sm text-gray-600 dark:text-gray-400"  style="color: white;">Password</label>
+  <div class="flex h-screen items-center justify-center">
+    <div class="w-full max-w-md">
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="flex mb-6">
+                <div class="bg-custom-blue h-8 w-8 flex items-center justify-center rounded-full mr-2">
+                    <svg class="text-white h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 15l-3 3 3 3 3-3-3-3"></path>
+                    </svg>
+                </div>
+                <div class="text-xl font-semibold text-gray-700">
+                    Sign in to your account
+                </div>
             </div>
-            <input type="password" name="pass" id="password" placeholder="Masukan Password" class="form-control w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />     
+            <form class="mb-4">
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="username">
+                        Username
+                    </label>
+                    <input class="appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 leading-tight focus:outline-none focus:border-gray-500" id="username" type="text">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="password">
+                        Password
+                    </label>
+                    <input class="appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 leading-tight focus:outline-none focus:border-gray-500" id="password" type="password">
+                </div>
+                <div class=" justify-between mb-2">
+                    <div class="flex items-start flex-col items-start ms-2">
+                        <div>
+                            <input type="checkbox" class="text-custom-blue form-checkbox">
+                            <label class="ml-2 text-gray-700 font-semibold" for="remember">
+                                Remember me
+                            </label>
+                        </div>
+                        <a class="text-sm text-gray-600 hover:text-blue-500" href="#">
+                            Forgot password?
+                        </a>
+                        <a class="text-sm text-gray-600 hover:text-blue-500" href="#">
+                            Register now
+                        </a>
+                    </div>
+                </div>
+                <div class="mb-4 bg-indigo-500 text-center">
+                    <button class="bg-custom-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
+                        Login
+                    </button>
+                </div>
+            </form>
         </div>
-        <!-- <div class="mb-2">
-        <label for="stats" class="text-sm text-gray-600 dark:text-gray-400"  style="color: white;">Level</label>
-        </div> -->
-        <!-- <div class="mb-6">
-            <div class="flex justify-between mb-2">
-                <label for="status" class="text-sm text-gray-600 dark:text-gray-400"  style="color: white;">Status</label>
-            </div>
-            <input type="status" name="stats" id="stats" placeholder="Masukan Status" class="form-control w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />     
-        </div> -->
-        <select name="stats" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 mb-6" name="level" id="level">
-            <option value="" hidden>Masukan Level</option>
-            <option id="admin" name="stats" value="ADMIN">ADMIN</option>
-            <option id="petugas" name="stats" value="AKTIF">AKTIF</option>
-        </select>
-        <div class="mb-6">
-            <button type="submit" class="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none">Masuk</button>
-        </div>
-        <%if (pesanFlash) { %>
-            <div class="alert alert-<%= colorFlash %> alert-dismissible fade show mt-3" role="alert">
-                <strong><%= statusFlash %></strong> 
-                <%= pesanFlash %>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <% } %>
-    </form>
+    </div>
+</div>
 </body>
 </html>

@@ -27,12 +27,7 @@ app.set('views', [
 app.set('view engine', 'ejs');
 
 //Deklarasikan folder folder pendukung
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public/css')));
-app.use(express.static(path.join(__dirname, 'modelController')));
-app.use(express.static(path.join(__dirname, 'middleware')));
-app.use(express.static(path.join(__dirname, 'configs')));
-app.use(express.static(path.join(__dirname, 'routes')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 // Configurasi dan gunakan library
 app.use(bodyParser.urlencoded({ extended: false }));
