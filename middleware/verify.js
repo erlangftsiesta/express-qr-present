@@ -15,5 +15,12 @@ module.exports = {
             return;
         }
         res.redirect('/');
+    },
+    isAdmin(req, res, next){
+        if(req.session.loggedin === true && req.session.status === 'ADMIN'){
+            next(); // Jika pengguna login dan memiliki status 'admin', lanjutkan
+        } else {
+            res.redirect('/'); // Jika tidak, redirect ke halaman utama atau halaman lain yang sesuai
+        }
     }
 };

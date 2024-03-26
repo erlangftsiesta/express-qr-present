@@ -27,7 +27,7 @@ module.exports = {
                 let query = '';
     
                 if (status === 'AKTIF') {
-                    query = 'SELECT * FROM login WHERE username = ? AND password = ?';
+                    query = 'SELECT * FROM login_siswa WHERE username = ? AND password = ?';
                 } else if (status === 'ADMIN') {
                     query = 'SELECT * FROM admin WHERE username = ? AND password = ?';
                 } else {
