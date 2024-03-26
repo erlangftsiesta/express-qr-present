@@ -4,4 +4,4 @@ const verifyUser = require('../middleware/verify');
 
 router.get('/', verifyUser.isLogin, homepageController.homepage);
 
-module.exports = router
+module.exports = router;

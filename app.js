@@ -39,11 +39,11 @@ app.use(flash());
 
 //Konfigurasi file path routing
 const loginRoute = require('./routes/login-router');
-const homeRoute = require('./routes/homepage-router');
+const appRoute = require('./routes/app-router')
 
 //Konfigurasi routes yang telah di deklarasikan
 app.use('/login', loginRoute);
-app.use('/', homeRoute);
+app.use('/', appRoute);
 
 app.use(flash())
 
