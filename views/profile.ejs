@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile Page</title>
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styleOUT.css">
 </head>
 <body>
   <div class="flex min-h-screen bg-gray-100">
@@ -48,11 +48,16 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator"></script>
+  <script src="/js/qr.js"></script>
   <script>
     // Function to generate QR code
     function generateQR(username, nama, kelas) {
-      const qrText = `Username: ${username}\nNama: ${nama}\nKelas: ${kelas}`;
+      const json = {
+        username,
+        nama,
+        kelas
+      }
+      const qrText = `${JSON.stringify(json)}`;
       const typeNumber = 0;
       const errorCorrectionLevel = 'L';
       const qr = qrcode(typeNumber, errorCorrectionLevel);

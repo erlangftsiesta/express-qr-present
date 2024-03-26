@@ -41,9 +41,11 @@ app.use(flash());
 //Konfigurasi file path routing
 const loginRoute = require('./routes/login-router');
 const appRoute = require('./routes/app-router')
+const adminRoute = require('./routes/admin-router');
 
 //Konfigurasi routes yang telah di deklarasikan
 app.use('/login', loginRoute);
+app.use('/admin', adminRoute);
 app.use('/', appRoute);
 
 //menambahkan method flash dari modul flash kedalam projek
