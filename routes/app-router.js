@@ -9,7 +9,8 @@ const profileController = require('../modelController').profile;
 
 //buat jalur routing
 router.get('/', verifyUser.isLogin, homepageController.homepage);
-router.get('/profile', verifyUser.isLogin, profileController.profile);
+// router.get('/profile', verifyUser.isLogin, profileController.profile);
+router.get('/profile', profileController.profile);
 
 //export semua konfigurasi agar bisa dibaca oleh file lain
 module.exports = router;
