@@ -1,1 +1,62 @@
-ini homepej admin
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/styleOUT.css">
+</head>
+<body>
+   <!-- navbar.ejs -->
+<nav class="bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <!-- Logo atau nama aplikasi -->
+          <div class="flex-shrink-0">
+            <a href="/" class="text-white font-bold text-xl">menu</a>
+          </div>
+          <!-- Menu utama -->
+          <div class="hidden md:block">
+            <ul class="ml-10 flex space-x-4">
+              <li><a href="#Beranda" class="text-gray-300 hover:text-white">Beranda</a></li>
+              <li><a href="#" class="text-gray-300 hover:text-white">Produk</a></li>
+              <!-- Tambahkan menu dropdown di sini -->
+              <!-- Contoh: -->
+              <li class="relative group">
+                <a href="#" class="text-gray-300 hover:text-white">Dropdown</a>
+                <ul class="absolute hidden bg-gray-700 text-white p-2 space-y-2 group-hover:block">
+                  <li><a href="#" class="hover:text-gray-200">Submenu 1</a></li>
+                  <li><a href="#" class="hover:text-gray-200">Submenu 2</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Tombol menu mobile (untuk tampilan kecil) -->
+        <div class="-mr-2 flex md:hidden">
+          <button type="button" class="text-gray-300 hover:text-white">
+            <!-- Icon menu (misalnya menggunakan font-awesome atau SVG) -->
+            Menu
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+    <section id="Beranda">
+        <h1 class="mt-56 flex justify-center text-6xl text-white text-sans">Selamat Datang</h1>
+        <div class="flex justify-center text-6xl text-white text-sans">Admin</div>
+        <div class="">
+    
+        </div>
+        <script>alert('Hanya Admin')</script>
+    
+    </section>
+    <div>
+        
+    </div>
+    
+</body>
+</html>
