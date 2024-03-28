@@ -15,6 +15,8 @@
 
   <script src="/js/jsqr.js"></script>
   <script>
+    let Sudah = []
+    let Sudah2 = []
     // Function to start the QR scanner
     function startScanner() {
       navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
@@ -34,9 +36,18 @@
               if (code) {
                 if(isJSON(code.data)){
                     const {username,nama,kelas} = JSON.parse(code.data)
-
+                    if(Sudah.includes(username)){
+                      if(Sudah2.includes(username)){
+                        return
+                      }
+                      // warns
+                      appendWarn(`${nama} - ${kelas} Berhasil Absen`)
+                      Sudah2.push(username)
+                      return
+                    }
                     // LOGIKA LOGIN MU DI SINI, KU SARANIN BUAT API ENDPOINT DI ADMIN
                     appendAlert(`${nama} - ${kelas} Berhasil Absen`)
+                    Sudah.push(username)
                 } else {
                     console.log("NO")
                     alert("QR mu bukan absen")
@@ -62,6 +73,7 @@
 }
 
 
+
     // Function to append new alert
     function appendAlert(message) {
       const alertContainer = document.getElementById('alert-container');
@@ -82,6 +94,27 @@
         alertElement.remove();
       }, 5000); // Remove the alert after 5 seconds
     }
+
+    function appendAlert(message) {
+      const alertContainer = document.getElementById('alert-container');
+      const alertElement = document.createElement('div');
+      alertElement.className = 'join rounded-box w-full';
+      alertElement.innerHTML = `
+        <div class="join-item p-4 bg-warning  text-warning -content text-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+        </div>
+        <div class="join-item flex flex-col py-2 px-4 bg-base-200">
+            <h3 class="text-warning font-bold">Warning</h3>
+            <span class="text-sm">${message}</span>
+        </div>`;
+      alertContainer.prepend(alertElement);
+      setTimeout(() => {
+        alertElement.remove();
+      }, 5000); // Remove the alert after 5 seconds
+    }
+
 
     // Call the function to start the scanner
     startScanner();
