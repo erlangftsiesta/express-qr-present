@@ -41,13 +41,14 @@
                         return
                       }
                       // warns
-                      appendWarn(`${nama} - ${kelas} Berhasil Absen`)
+                      appendWarn(`${nama} - ${kelas} Sudah Absen`)
                       Sudah2.push(username)
                       return
                     }
+                    Sudah.push(username)
                     // LOGIKA LOGIN MU DI SINI, KU SARANIN BUAT API ENDPOINT DI ADMIN
                     appendAlert(`${nama} - ${kelas} Berhasil Absen`)
-                    Sudah.push(username)
+                    return
                 } else {
                     console.log("NO")
                     alert("QR mu bukan absen")
@@ -95,7 +96,7 @@
       }, 5000); // Remove the alert after 5 seconds
     }
 
-    function appendAlert(message) {
+    function appendWarn(message) {
       const alertContainer = document.getElementById('alert-container');
       const alertElement = document.createElement('div');
       alertElement.className = 'join rounded-box w-full';
