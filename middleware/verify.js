@@ -1,8 +1,10 @@
 module.exports = {
     isLogin(req, res, next){
         if(req.session.loggedin === true){
-            next();
-            return;
+            if (req.session.status == 'AKTIF'){
+                next();
+                return;
+            }
         } else {
             req.session.destroy(function(err) {
                 res.redirect('/login');
