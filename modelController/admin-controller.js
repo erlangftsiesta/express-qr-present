@@ -23,5 +23,9 @@ module.exports = {
             kelas:"XI RPL 3",
             status:"ADMIN"
         })
+    },
+    APIScan(req,res){
+        const {username,nama,kelas} = req.body;
+        // queryy dari sini aing mau nambahin absen ke orang "NAMA" 
     }
 }

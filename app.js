@@ -50,7 +50,8 @@ app.use('/', appRoute);
 
 //menambahkan method flash dari modul flash kedalam projek
 app.use(flash())
-
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
 //==================================================================================================================
 
 //Jangan tanya, gua ga ngerti yang ini wkakakakkaka
