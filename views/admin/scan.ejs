@@ -64,8 +64,11 @@
 											headers: {
 												"Content-Type": "application/json",
 											},
-										});
-										appendAlert(`${nama} - ${kelas} Berhasil Absen`);
+										}).then((res) =>{
+                      res.json().then((res)=>{
+                        appendAlert(res.message);
+                      })
+                    })
 										return;
 									} else {
 										console.log("NO");

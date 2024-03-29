@@ -59,7 +59,7 @@ module.exports = {
                         }
     
                         // Berhasil memperbarui data presensi
-                        res.status(200).json({ message: 'Data presensi berhasil diperbarui' });
+                        res.status(200).json({ message: `${nama} - ${kelas} Berhasil Absen Pulang` });
                     });
                 } else {
                     // Tidak ada presensi hadir yang ditemukan, maka tambahkan presensi baru
@@ -78,7 +78,7 @@ module.exports = {
                         }
     
                         // Berhasil memasukkan data presensi
-                        res.status(200).json({ message: 'Data presensi berhasil ditambahkan' });
+                        res.status(200).json({ message: `${nama} - ${kelas} Berhasil Absen Masuk` });
                     });
                 }
             });
