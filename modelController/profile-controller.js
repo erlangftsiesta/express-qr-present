@@ -51,7 +51,7 @@ module.exports = {
                 }
             );
         });
-    }
+    },
     // profile(req, res) {
     //     res.render("profile",{
     //         username:"erlangftsiesta",
@@ -60,4 +60,55 @@ module.exports = {
     //         status:"AKTIF"
     //     })
     // }
+    changePassword(req, res) {
+        const { username, oldPassword, newPassword } = req.body;
+    
+        // Mendapatkan koneksi dari pool
+        pool.getConnection(function (err, connection) {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ error: 'Kesalahan dalam mendapatkan koneksi dari pool' });
+                return;
+            }
+    
+            // Buat query untuk memeriksa password lama
+            const checkQuery = `SELECT * FROM login_siswa WHERE username = '${username}' AND password = '${oldPassword}'`;
+            
+            // Eksekusi query
+            connection.query(checkQuery, [username, oldPassword], function (err, results) {
+                if (err) {
+                    connection.release(); // Melepaskan koneksi setelah selesai
+                    console.error(err);
+                    res.status(500).json({ error: 'Kesalahan dalam eksekusi query' });
+                    return;
+                }
+    
+                // Jika password lama cocok
+                if (results.length > 0) {
+                    // Buat query untuk mengubah password
+                    const updateQuery = `UPDATE login_siswa SET password = '${newPassword}' WHERE username = '${username}'`;
+                    
+                    // Eksekusi query untuk mengubah password
+                    connection.query(updateQuery, [newPassword, username], function (err, results) {
+                        connection.release(); // Melepaskan koneksi setelah selesai
+                        
+                        if (err) {
+                            console.error(err);
+                            req.flash('error', 'Kesalahan dalam mengubah password');
+                        } else {
+                            req.flash('success', 'Password berhasil diubah');
+                        }
+                        res.redirect('/profile?status=success&message=Password%20berhasil%20diubah!');
+                        
+                    });
+                } else {
+                    connection.release(); // Melepaskan koneksi setelah selesai
+                    res.status(400).json({ error: 'Password lama tidak cocok' });
+                }
+            });
+        });
+    }, 
+    changeUsername(req, res){
+
+    }
 }

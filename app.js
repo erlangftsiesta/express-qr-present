@@ -3,15 +3,15 @@ const express = require('express');
 const app = express();
 const PORT = 1214; //variable untuk menampung nilai alamat PORT
 const path = require('path');
-const session = require('express-session');
 const bodyParser = require('body-parser');
-const flash = require('req-flash');
 const csv = require("fast-csv");
+const session = require('express-session');
+const flash = require('express-flash');
 
 //Konfigurasi Session Login dan buat Cookies untuk menyimpan microdata
 app.use(session({
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     secret: 'devacctoRPL',
     name: 'secretName',
     cookie: {
@@ -19,6 +19,13 @@ app.use(session({
         maxAge: 1*60*60*24*7*1000
     },
 }));
+
+//Konfigurasi pesan Flash (library flash)
+app.use(flash())
+app.use((req, res, next) => {
+    res.locals.messages = req.flash();
+    next();
+});
 
 // Definisikan view engine, folder views dan format penampil HTML
 app.set('views', [
@@ -33,7 +40,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 // Configurasi dan gunakan library
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(flash());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
 
 //HANDLE WITH CARE!
 //==================================================================================================================
@@ -48,10 +56,7 @@ app.use('/login', loginRoute);
 app.use('/admin', adminRoute);
 app.use('/', appRoute);
 
-//menambahkan method flash dari modul flash kedalam projek
-app.use(flash())
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json())
+
 //==================================================================================================================
 
 //Jangan tanya, gua ga ngerti yang ini wkakakakkaka

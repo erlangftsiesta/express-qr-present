@@ -14,7 +14,7 @@ module.exports = {
             if (err) throw err;
             connection.query(
                 `
-                SELECT * FROM login WHERE id_login = '${id}';
+                SELECT * FROM login_siswa WHERE id_login = '${id}';
                 `
             , function(error, results){
                 if (error) throw error;

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile Page</title>
   <link rel="stylesheet" href="/css/styleOUT.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   <div class="flex min-h-screen bg-gray-100">
@@ -29,7 +30,8 @@
 
           <div class="flex flex-col space-y-2 p-4 border-t border-gray-200">
             <a href="#" id="generateQR" class="w-full px-4 py-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-700">Generate Absensi QR</a>
-            <a href="#" class="w-full px-4 py-2 text-center text-red-500 hover:text-red-700 underline">Logout</a>
+            <a href="#" id="generateChangePassword" class="w-full px-4 py-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-700">Ubah Password </a>
+            <a href="/login/logout" class="w-full px-4 py-2 text-center text-red-500 hover:text-red-700 underline">Logout</a>
           </div>
         </div>
       </div>
@@ -41,6 +43,28 @@
   </div>
 
   <!-- Modal for displaying QR code -->
+  <div id="qrModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 hidden">
+    <div class="bg-white p-8 rounded-md max-w-md">
+      <img id="qrImage" src="" alt="QR Code" width="300" height="300">
+      <button id="closeModal" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">Close</button>
+    </div>
+  </div>
+
+  <div id="changePasswordModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 hidden">
+    <div class="bg-white p-8 rounded-md max-w-lg">
+      <form action="/api/send-change-password" method="POST">
+        <label for="username">Nama Pengguna</label> <br>
+        <input type="text" value="<%= username %>" name="username"> <br>
+        <label for="passwordLama">Password Sebelumnya</label> <br>
+        <input type="password" name="oldPassword"> <br>
+        <label for="passwordBaru">Password Baru</label> <br>
+        <input type="password" name="newPassword">
+        <button id="submitChangePassword" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">Kirim</button>
+      </form>
+      <button id="closeModalChangePassword" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700">Batalkan</button>
+    </div>
+  </div>
+
   <div id="qrModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 hidden">
     <div class="bg-white p-8 rounded-md max-w-md">
       <img id="qrImage" src="" alt="QR Code" width="300" height="300">
@@ -75,9 +99,65 @@
       document.getElementById('qrModal').classList.remove('hidden');
     });
 
+    function changePassword() {
+        const username = document.querySelector('input[name="username"]').value;
+        const oldPassword = document.getElementById('oldPasswordInput').value;
+        const newPassword = document.getElementById('newPasswordInput').value;
+
+        fetch("/api/send-change-password", {
+            body: JSON.stringify({ username, oldPassword, newPassword }),
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((res) => {
+            res.json().then((data) => {
+                if (data.success) {
+                    alert(data.message); // Notifikasi jika berhasil
+                    window.location.href = '/profile'; // Redirect ke /profile
+                } else {
+                    alert(data.error); // Notifikasi jika gagal
+                }
+            });
+        });
+    }
+      document.getElementById('generateChangePassword').addEventListener('click', () => {
+      document.getElementById('changePasswordModal').classList.remove('hidden');
+    });
+    
+
+
     document.getElementById('closeModal').addEventListener('click', function() {
       document.getElementById('qrModal').classList.add('hidden');
     });
+    document.getElementById('closeModalChangePassword').addEventListener('click', function() {
+      document.getElementById('changePasswordModal').classList.add('hidden');
+    });
+  </script>
+  <script>
+    window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+    const message = urlParams.get('message');
+
+    if (status === 'success') {
+        Swal.fire(
+            'Berhasil!',
+            message,
+            'success'
+            ).then((result) => {
+            // Redirect ke halaman login setelah menutup alert
+            window.location.href = '/login';
+            });
+    } else if (status === 'error') {
+        Swal.fire(
+            'Gagal!',
+            message,
+            'error'
+        );
+    }
+}
+
   </script>
 </body>
 </html>
