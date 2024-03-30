@@ -58,7 +58,7 @@
         <label for="passwordLama">Password Sebelumnya</label> <br>
         <input type="password" name="oldPassword"> <br>
         <label for="passwordBaru">Password Baru</label> <br>
-        <input type="password" name="newPassword">
+        <input type="password" name="newPassword"><br>
         <button id="submitChangePassword" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">Kirim</button>
       </form>
       <button id="closeModalChangePassword" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700">Batalkan</button>
@@ -147,7 +147,7 @@
             'success'
             ).then((result) => {
             // Redirect ke halaman login setelah menutup alert
-            window.location.href = '/login';
+            window.location.href = '/login/logout';
             });
     } else if (status === 'error') {
         Swal.fire(
