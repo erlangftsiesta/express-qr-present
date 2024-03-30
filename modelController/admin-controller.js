@@ -99,5 +99,8 @@ module.exports = {
                 }
             });
         });
+    },
+    showPresensi(req,res){
+        res.render("admin/showAbsensi")
     }
 }

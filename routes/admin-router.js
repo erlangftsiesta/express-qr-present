@@ -10,5 +10,6 @@ const { admin } = require('../modelController');
 router.get('/', admin.homepage);
 router.get('/scan', admin.scan);
 router.post('/api/send', admin.APIScan);
+router.get('/show', admin.showPresensi);
 
 module.exports = router

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presensi Page</title>
+  <link rel="stylesheet" href="/css/styleOUT.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="mb-4">
+  <div class="flex min-h-screen bg-gray-100">
+    <div class="fixed top-0 left-0 w-full h-16 bg-white shadow-md flex items-center justify-between px-4">
+      <h1 class="text-xl font-medium">Your App Name</h1>
+      <ul class="flex space-x-4">
+        <li><a href="#" class="text-gray-600 hover:text-gray-800 underline">Home</a></li>
+        <li><a href="#" class="text-gray-600 hover:text-gray-800 underline">About</a></li>
+        <li><a href="#" class="text-gray-600 hover:text-gray-800 underline">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="flex-grow px-4 pt-16 mt-16">
+      <div class="flex flex-col mx-auto w-full md:w-1/2 lg:w-1/3">
+        <div class="flex flex-col bg-white shadow-md rounded-md overflow-hidden mb-16">
+          <div class="p-4 flex flex-col space-y-2">
+            <h2 class="text-xl font-medium text-gray-800">Presensi</h2>
+            <div id="presensiData">
+              <!-- Data presensi akan ditampilkan di sini -->
+            </div>
+            <div id="pagination" class="flex justify-center space-x-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fixed bottom-0 left-0 w-full h-12 bg-gray-200 flex items-center justify-center text-gray-500">
+      &copy; 2024 Your Company Name
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      const presensiData = [
+        // Data presensi asal
+        {
+          id_presensi: 1,
+          username: 'cecil',
+          nama_lengkap: 'Priscilla Cecil Ardelia',
+          kelas: 'X RPL 2',
+          presensi_hadir: '2024-03-29T16:57:50.000Z',
+          presensi_pulang: '2024-03-29T17:07:37.000Z'
+        },
+        {
+          id_presensi: 2,
+          username: 'cecil',
+          nama_lengkap: 'Priscilla Cecil Ardelia',
+          kelas: 'X RPL 2',
+          presensi_hadir: '2024-03-29T17:08:30.000Z',
+          presensi_pulang: '2024-03-29T17:08:49.000Z'
+        },
+        {
+          id_presensi: 3,
+          username: 'cecil',
+          nama_lengkap: 'Priscilla Cecil Ardelia',
+          kelas: 'X RPL 2',
+          presensi_hadir: '2024-03-29T17:11:03.000Z',
+          presensi_pulang: '2024-03-29T17:11:58.000Z'
+        },
+        {
+          id_presensi: 4,
+          username: 'erlangftsiesta',
+          nama_lengkap: 'Erlangga Muhammad Hafiz',
+          kelas: 'XI RPL 3',
+          presensi_hadir: '2024-03-29T17:11:10.000Z',
+          presensi_pulang: '2024-03-29T17:11:30.000Z'
+        },
+        {
+          id_presensi: 5,
+          username: 'cecil',
+          nama_lengkap: 'Priscilla Cecil Ardelia',
+          kelas: 'X RPL 2',
+          presensi_hadir: '2024-03-29T17:12:27.000Z',
+          presensi_pulang: '2024-03-29T17:12:34.000Z'
+        },
+        {
+          id_presensi: 6,
+          username: 'erlangftsiesta',
+          nama_lengkap: 'Erlangga Muhammad Hafiz',
+          kelas: 'XI RPL 3',
+          presensi_hadir: '2024-03-29T17:19:25.000Z',
+          presensi_pulang: '2024-03-29T17:19:36.000Z'
+        },
+        // Data tambahan untuk pengujian
+        {
+          id_presensi: 7,
+          username: 'john_doe',
+          nama_lengkap: 'John Doe',
+          kelas: 'XII IPA 1',
+          presensi_hadir: '2024-03-30T08:00:00.000Z',
+          presensi_pulang: '2024-03-30T14:00:00.000Z'
+        },
+        {
+          id_presensi: 8,
+          username: 'jane_doe',
+          nama_lengkap: 'Jane Doe',
+          kelas: 'XII IPA 2',
+          presensi_hadir: '2024-03-30T08:30:00.000Z',
+          presensi_pulang: '2024-03-30T14:30:00.000Z'
+        },
+        {
+          id_presensi: 5,
+          username: 'cecil',
+          nama_lengkap: 'Priscilla Cecil Ardelia',
+          kelas: 'X RPL 2',
+          presensi_hadir: '2024-03-29T17:12:27.000Z',
+          presensi_pulang: '2024-03-29T17:12:34.000Z'
+        },
+        {
+          id_presensi: 6,
+          username: 'erlangftsiesta',
+          nama_lengkap: 'Erlangga Muhammad Hafiz',
+          kelas: 'XI RPL 3',
+          presensi_hadir: '2024-03-29T17:19:25.000Z',
+          presensi_pulang: '2024-03-29T17:19:36.000Z'
+        },
+        // Data tambahan untuk pengujian
+        {
+          id_presensi: 7,
+          username: 'john_doe',
+          nama_lengkap: 'John Doe',
+          kelas: 'XII IPA 1',
+          presensi_hadir: '2024-03-30T08:00:00.000Z',
+          presensi_pulang: '2024-03-30T14:00:00.000Z'
+        },
+        {
+          id_presensi: 8,
+          username: 'jane_doe',
+          nama_lengkap: 'Jane Doe',
+          kelas: 'XII IPA 2',
+          presensi_hadir: '2024-03-30T08:30:00.000Z',
+          presensi_pulang: '2024-03-30T14:30:00.000Z'
+        },
+        {
+          id_presensi: 5,
+          username: 'cecil',
+          nama_lengkap: 'Priscilla Cecil Ardelia',
+          kelas: 'X RPL 2',
+          presensi_hadir: '2024-03-29T17:12:27.000Z',
+          presensi_pulang: '2024-03-29T17:12:34.000Z'
+        },
+        {
+          id_presensi: 6,
+          username: 'erlangftsiesta',
+          nama_lengkap: 'Erlangga Muhammad Hafiz',
+          kelas: 'XI RPL 3',
+          presensi_hadir: '2024-03-29T17:19:25.000Z',
+          presensi_pulang: '2024-03-29T17:19:36.000Z'
+        },
+        // Data tambahan untuk pengujian
+        {
+          id_presensi: 7,
+          username: 'john_doe',
+          nama_lengkap: 'John Doe',
+          kelas: 'XII IPA 1',
+          presensi_hadir: '2024-03-30T08:00:00.000Z',
+          presensi_pulang: '2024-03-30T14:00:00.000Z'
+        },
+        {
+          id_presensi: 8,
+          username: 'jane_doe',
+          nama_lengkap: 'Jane Doe',
+          kelas: 'XII IPA 2',
+          presensi_hadir: '2024-03-30T08:30:00.000Z',
+          presensi_pulang: '2024-03-30T14:30:00.000Z'
+        }
+        // Tambah data presensi di sini sesuai kebutuhan untuk pengujian
+      ];
+
+      const presensiContainer = document.getElementById('presensiData');
+
+      // Function to render presensi data
+      function renderPresensiData(startIndex, endIndex) {
+        presensiContainer.innerHTML = ''; // Clear previous data
+
+        for (let i = startIndex; i < endIndex; i++) {
+          const presensi = presensiData[i];
+          const presensiElement = document.createElement('div');
+          presensiElement.classList.add('border', 'border-gray-200', 'p-4', 'mb-4', 'rounded-md');
+
+          presensiElement.innerHTML = `
+            <p><strong>ID Presensi:</strong> ${presensi.id_presensi}</p>
+            <p><strong>Username:</strong> ${presensi.username}</p>
+            <p><strong>Nama Lengkap:</strong> ${presensi.nama_lengkap}</p>
+            <p><strong>Kelas:</strong> ${presensi.kelas}</p>
+            <p><strong>Presensi Hadir:</strong> ${new Date(presensi.presensi_hadir).toLocaleString()}</p>
+            <p><strong>Presensi Pulang:</strong> ${new Date(presensi.presensi_pulang).toLocaleString()}</p>
+          `;
+
+          presensiContainer.appendChild(presensiElement);
+        }
+      }
+
+      // Initial rendering
+      const itemsPerPage = 10;
+      let currentPage = 1;
+      const totalPages = Math.ceil(presensiData.length / itemsPerPage);
+      renderPresensiData(0, itemsPerPage);
+
+      // Function to handle pagination click
+      function handlePaginationClick(page) {
+        currentPage = page;
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, presensiData.length);
+        renderPresensiData(startIndex, endIndex);
+      }
+
+      // Render pagination buttons
+      const paginationContainer = document.getElementById('pagination');
+      for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        pageButton.addEventListener('click', () => handlePaginationClick(i));
+        paginationContainer.appendChild(pageButton);
+      }
+    }
+  </script>
+</body>
+</html>
