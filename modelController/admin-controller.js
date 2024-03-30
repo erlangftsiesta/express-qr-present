@@ -8,20 +8,36 @@ pool.on('error',(err)=> {
 });
 
 module.exports = {
-    homepage(req,res) {
-        res.render("admin/homeAdmin",{
-            username:"admin",
-            nama_lengkap:"Muhammad Erlangga Hafiz",
-            kelas:"XI RPL 3",
-            status:"ADMIN"
-        })
-    },
+    homepage(req, res) {
+        // Mendapatkan koneksi dari pool
+        pool.getConnection(function (err, connection) {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ error: 'Kesalahan dalam mendapatkan koneksi dari pool' });
+                return;
+            }
+    
+            // Buat query untuk mengambil semua data dari tabel presensi
+            const query = "SELECT * FROM presensi";
+    
+            // Eksekusi query
+            connection.query(query, function (err, results) {
+                connection.release(); // Melepaskan koneksi setelah selesai
+    
+                if (err) {
+                    console.error(err);
+                    res.status(500).json({ error: 'Kesalahan dalam eksekusi query' });
+                    return;
+                }
+    
+                // Tampilkan semua data presensi
+                res.render("admin/homeAdmin", { presensiData: results });
+                console.log(results)
+            });
+        });
+    },    
     scan(req,res) {
         res.render("admin/scan",{
-            username:"admin",
-            nama_lengkap:"Muhammad Erlangga Hafiz",
-            kelas:"XI RPL 3",
-            status:"ADMIN"
         })
     },
     APIScan(req, res) {
