@@ -101,6 +101,143 @@ module.exports = {
         });
     },
     showPresensi(req,res){
-        res.render("admin/showAbsensi")
+        res.render("admin/showAbsensi",
+        {
+            data:encodeURIComponent(JSON.stringify([
+            // Data presensi asal
+            {
+              id_presensi: 1,
+              username: 'cecil',
+              nama_lengkap: 'Priscilla Cecil Ardelia',
+              kelas: 'X RPL 2',
+              presensi_hadir: '2024-03-29T16:57:50.000Z',
+              presensi_pulang: '2024-03-29T17:07:37.000Z'
+            },
+            {
+              id_presensi: 2,
+              username: 'cecil',
+              nama_lengkap: 'Priscilla Cecil Ardelia',
+              kelas: 'X RPL 2',
+              presensi_hadir: '2024-03-29T17:08:30.000Z',
+              presensi_pulang: '2024-03-29T17:08:49.000Z'
+            },
+            {
+              id_presensi: 3,
+              username: 'cecil',
+              nama_lengkap: 'Priscilla Cecil Ardelia',
+              kelas: 'X RPL 2',
+              presensi_hadir: '2024-03-29T17:11:03.000Z',
+              presensi_pulang: '2024-03-29T17:11:58.000Z'
+            },
+            {
+              id_presensi: 4,
+              username: 'erlangftsiesta',
+              nama_lengkap: 'Erlangga Muhammad Hafiz',
+              kelas: 'XI RPL 3',
+              presensi_hadir: '2024-03-29T17:11:10.000Z',
+              presensi_pulang: '2024-03-29T17:11:30.000Z'
+            },
+            {
+              id_presensi: 5,
+              username: 'cecil',
+              nama_lengkap: 'Priscilla Cecil Ardelia',
+              kelas: 'X RPL 2',
+              presensi_hadir: '2024-03-29T17:12:27.000Z',
+              presensi_pulang: '2024-03-29T17:12:34.000Z'
+            },
+            {
+              id_presensi: 6,
+              username: 'erlangftsiesta',
+              nama_lengkap: 'Erlangga Muhammad Hafiz',
+              kelas: 'XI RPL 3',
+              presensi_hadir: '2024-03-29T17:19:25.000Z',
+              presensi_pulang: '2024-03-29T17:19:36.000Z'
+            },
+            // Data tambahan untuk pengujian
+            {
+              id_presensi: 7,
+              username: 'john_doe',
+              nama_lengkap: 'John Doe',
+              kelas: 'XII IPA 1',
+              presensi_hadir: '2024-03-30T08:00:00.000Z',
+              presensi_pulang: '2024-03-30T14:00:00.000Z'
+            },
+            {
+              id_presensi: 8,
+              username: 'jane_doe',
+              nama_lengkap: 'Jane Doe',
+              kelas: 'XII IPA 2',
+              presensi_hadir: '2024-03-30T08:30:00.000Z',
+              presensi_pulang: '2024-03-30T14:30:00.000Z'
+            },
+            {
+              id_presensi: 5,
+              username: 'cecil',
+              nama_lengkap: 'Priscilla Cecil Ardelia',
+              kelas: 'X RPL 2',
+              presensi_hadir: '2024-03-29T17:12:27.000Z',
+              presensi_pulang: '2024-03-29T17:12:34.000Z'
+            },
+            {
+              id_presensi: 6,
+              username: 'erlangftsiesta',
+              nama_lengkap: 'Erlangga Muhammad Hafiz',
+              kelas: 'XI RPL 3',
+              presensi_hadir: '2024-03-29T17:19:25.000Z',
+              presensi_pulang: '2024-03-29T17:19:36.000Z'
+            },
+            // Data tambahan untuk pengujian
+            {
+              id_presensi: 7,
+              username: 'john_doe',
+              nama_lengkap: 'John Doe',
+              kelas: 'XII IPA 1',
+              presensi_hadir: '2024-03-30T08:00:00.000Z',
+              presensi_pulang: '2024-03-30T14:00:00.000Z'
+            },
+            {
+              id_presensi: 8,
+              username: 'jane_doe',
+              nama_lengkap: 'Jane Doe',
+              kelas: 'XII IPA 2',
+              presensi_hadir: '2024-03-30T08:30:00.000Z',
+              presensi_pulang: '2024-03-30T14:30:00.000Z'
+            },
+            {
+              id_presensi: 5,
+              username: 'cecil',
+              nama_lengkap: 'Priscilla Cecil Ardelia',
+              kelas: 'X RPL 2',
+              presensi_hadir: '2024-03-29T17:12:27.000Z',
+              presensi_pulang: '2024-03-29T17:12:34.000Z'
+            },
+            {
+              id_presensi: 6,
+              username: 'erlangftsiesta',
+              nama_lengkap: 'Erlangga Muhammad Hafiz',
+              kelas: 'XI RPL 3',
+              presensi_hadir: '2024-03-29T17:19:25.000Z',
+              presensi_pulang: '2024-03-29T17:19:36.000Z'
+            },
+            // Data tambahan untuk pengujian
+            {
+              id_presensi: 7,
+              username: 'john_doe',
+              nama_lengkap: 'John Doe',
+              kelas: 'XII IPA 1',
+              presensi_hadir: '2024-03-30T08:00:00.000Z',
+              presensi_pulang: '2024-03-30T14:00:00.000Z'
+            },
+            {
+              id_presensi: 8,
+              username: 'jane_doe',
+              nama_lengkap: 'Jane Doe',
+              kelas: 'XII IPA 2',
+              presensi_hadir: '2024-03-30T08:30:00.000Z',
+              presensi_pulang: '2024-03-30T14:30:00.000Z'
+            }
+            // Tambah data presensi di sini sesuai kebutuhan untuk pengujian
+          ]))
+        })
     }
 }
