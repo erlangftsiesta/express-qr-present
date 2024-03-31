@@ -9,7 +9,8 @@ const {homepage, profile} = require('../modelController')
 //buat jalur routing
 router.get('/', verifyUser.isLogin, homepage.homepage);
 router.get('/profile', verifyUser.isLogin, profile.profile);
-router.post('/api/send-change-password', profile.changePassword)
+router.post('/api/send-change-password', verifyUser.isLogin, profile.changePassword);
+router.post('/api/send-change-username', verifyUser.isLogin, profile.changeUsername);
 
 
 //export semua konfigurasi agar bisa dibaca oleh file lain
