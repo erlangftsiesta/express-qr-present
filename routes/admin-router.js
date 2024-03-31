@@ -14,4 +14,4 @@ router.post('/api/send', verifyUser.isAdminLogin, admin.APIScan);
 router.post('/api/send/tambah-data-siswa', verifyUser.isAdminLogin, admin.tambahSiswa)
 
 
-module.exports = router
+module.exports = router 
