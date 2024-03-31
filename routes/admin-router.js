@@ -11,7 +11,7 @@ router.get('/', verifyUser.isAdminLogin, admin.homepageAdmin);
 router.get('/scan', verifyUser.isAdminLogin, admin.scan);
 router.get('/show', verifyUser.isAdminLogin, admin.showPresensi);
 router.post('/api/send', verifyUser.isAdminLogin, admin.APIScan);
-router.post('/api/send/tambah-data-siswa', verifyUser.isAdminLogin, admin.tambahSiswa)
+router.post('/api/send/tambah-data-siswa', admin.tambahSiswa);
 
 
 module.exports = router

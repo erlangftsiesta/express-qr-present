@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/api/send/tambah-data-siswa" method="POST">
+        <label for="">username</label>
+        <input name="username" type="text">
+        <label for="">password</label>
+        <input name="password" type="password">
+        <label for="">Nama Lengkap</label>
+        <input name="nama_lengkap" type="text">
+        <label for="">kelas</label>
+        <input name="kelas" type="text">
+        <label for="">status</label>
+        <select name="status" id="">
+            <option name="status" value="AKTIF">AKTIF</option>
+        </select>
+
+    </form>
+    <script>
+    function changePassword() {
+        const username = document.querySelector('input[name="username"]').value;
+        const oldPassword = document.getElementById('oldPasswordInput').value;
+        const newPassword = document.getElementById('newPasswordInput').value;
+
+        fetch("/api/send/tambah-data-siswa", {
+            body: JSON.stringify({ username, oldPassword, newPassword }),
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((res) => {
+            res.json().then((data) => {
+                if (data.success) {
+                    alert(data.message); // Notifikasi jika berhasil
+                } else {
+                    alert(data.error); // Notifikasi jika gagal
+                }
+            });
+        });
+    }
+    </script>
+    <script src="/js/sweetalert2.js"></script>
+</body>
+</html>

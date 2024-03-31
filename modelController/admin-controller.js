@@ -34,6 +34,9 @@ module.exports = {
             })
         })
     },
+    pageTambahDataSiswa(req, res){
+        
+    },
     
     scan(req,res) {
         res.render("admin/scan",{
@@ -154,10 +157,10 @@ module.exports = {
                         return res.status(500).send('Error saat menambahkan siswa');
                     }
     
-                    res.status(200).send('Siswa berhasil ditambahkan');
+                    res.redirect('/')
                 });
             });
         });
-    },
+    },    
     
 }
