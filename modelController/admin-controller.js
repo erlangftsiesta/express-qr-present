@@ -35,7 +35,7 @@ module.exports = {
         })
     },
     pageTambahDataSiswa(req, res){
-        
+        //BACKEND DEVELOPERNYA TEWAS MENGENASKAN 💀
     },
     
     scan(req,res) {
