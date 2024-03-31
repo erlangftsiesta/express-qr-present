@@ -8,34 +8,33 @@ pool.on('error',(err)=> {
 });
 
 module.exports = {
-    homepage(req, res) {
-        // Mendapatkan koneksi dari pool
-        pool.getConnection(function (err, connection) {
+    homepageAdmin(req, res) {
+        pool.getConnection(function(err, connection) {
             if (err) {
                 console.error(err);
                 res.status(500).json({ error: 'Kesalahan dalam mendapatkan koneksi dari pool' });
                 return;
             }
-    
-            // Buat query untuk mengambil semua data dari tabel presensi
-            const query = "SELECT * FROM presensi";
-    
-            // Eksekusi query
+            const query = `SELECT * FROM data_siswa`;
             connection.query(query, function (err, results) {
                 connection.release(); // Melepaskan koneksi setelah selesai
-    
+
+                res.render("admin/homeAdmin",
+                {
+                    data:encodeURIComponent(JSON.stringify(
+                        results
+                    ))
+                })
+
                 if (err) {
                     console.error(err);
                     res.status(500).json({ error: 'Kesalahan dalam eksekusi query' });
                     return;
                 }
+            })
+        })
+    },
     
-                // Tampilkan semua data presensi
-                res.render("admin/homeAdmin", { presensiData: results });
-                console.log(results)
-            });
-        });
-    },    
     scan(req,res) {
         res.render("admin/scan",{
         })
@@ -101,143 +100,64 @@ module.exports = {
         });
     },
     showPresensi(req,res){
-        res.render("admin/showAbsensi",
-        {
-            data:encodeURIComponent(JSON.stringify([
-            // Data presensi asal
-            {
-              id_presensi: 1,
-              username: 'cecil',
-              nama_lengkap: 'Priscilla Cecil Ardelia',
-              kelas: 'X RPL 2',
-              presensi_hadir: '2024-03-29T16:57:50.000Z',
-              presensi_pulang: '2024-03-29T17:07:37.000Z'
-            },
-            {
-              id_presensi: 2,
-              username: 'cecil',
-              nama_lengkap: 'Priscilla Cecil Ardelia',
-              kelas: 'X RPL 2',
-              presensi_hadir: '2024-03-29T17:08:30.000Z',
-              presensi_pulang: '2024-03-29T17:08:49.000Z'
-            },
-            {
-              id_presensi: 3,
-              username: 'cecil',
-              nama_lengkap: 'Priscilla Cecil Ardelia',
-              kelas: 'X RPL 2',
-              presensi_hadir: '2024-03-29T17:11:03.000Z',
-              presensi_pulang: '2024-03-29T17:11:58.000Z'
-            },
-            {
-              id_presensi: 4,
-              username: 'erlangftsiesta',
-              nama_lengkap: 'Erlangga Muhammad Hafiz',
-              kelas: 'XI RPL 3',
-              presensi_hadir: '2024-03-29T17:11:10.000Z',
-              presensi_pulang: '2024-03-29T17:11:30.000Z'
-            },
-            {
-              id_presensi: 5,
-              username: 'cecil',
-              nama_lengkap: 'Priscilla Cecil Ardelia',
-              kelas: 'X RPL 2',
-              presensi_hadir: '2024-03-29T17:12:27.000Z',
-              presensi_pulang: '2024-03-29T17:12:34.000Z'
-            },
-            {
-              id_presensi: 6,
-              username: 'erlangftsiesta',
-              nama_lengkap: 'Erlangga Muhammad Hafiz',
-              kelas: 'XI RPL 3',
-              presensi_hadir: '2024-03-29T17:19:25.000Z',
-              presensi_pulang: '2024-03-29T17:19:36.000Z'
-            },
-            // Data tambahan untuk pengujian
-            {
-              id_presensi: 7,
-              username: 'john_doe',
-              nama_lengkap: 'John Doe',
-              kelas: 'XII IPA 1',
-              presensi_hadir: '2024-03-30T08:00:00.000Z',
-              presensi_pulang: '2024-03-30T14:00:00.000Z'
-            },
-            {
-              id_presensi: 8,
-              username: 'jane_doe',
-              nama_lengkap: 'Jane Doe',
-              kelas: 'XII IPA 2',
-              presensi_hadir: '2024-03-30T08:30:00.000Z',
-              presensi_pulang: '2024-03-30T14:30:00.000Z'
-            },
-            {
-              id_presensi: 5,
-              username: 'cecil',
-              nama_lengkap: 'Priscilla Cecil Ardelia',
-              kelas: 'X RPL 2',
-              presensi_hadir: '2024-03-29T17:12:27.000Z',
-              presensi_pulang: '2024-03-29T17:12:34.000Z'
-            },
-            {
-              id_presensi: 6,
-              username: 'erlangftsiesta',
-              nama_lengkap: 'Erlangga Muhammad Hafiz',
-              kelas: 'XI RPL 3',
-              presensi_hadir: '2024-03-29T17:19:25.000Z',
-              presensi_pulang: '2024-03-29T17:19:36.000Z'
-            },
-            // Data tambahan untuk pengujian
-            {
-              id_presensi: 7,
-              username: 'john_doe',
-              nama_lengkap: 'John Doe',
-              kelas: 'XII IPA 1',
-              presensi_hadir: '2024-03-30T08:00:00.000Z',
-              presensi_pulang: '2024-03-30T14:00:00.000Z'
-            },
-            {
-              id_presensi: 8,
-              username: 'jane_doe',
-              nama_lengkap: 'Jane Doe',
-              kelas: 'XII IPA 2',
-              presensi_hadir: '2024-03-30T08:30:00.000Z',
-              presensi_pulang: '2024-03-30T14:30:00.000Z'
-            },
-            {
-              id_presensi: 5,
-              username: 'cecil',
-              nama_lengkap: 'Priscilla Cecil Ardelia',
-              kelas: 'X RPL 2',
-              presensi_hadir: '2024-03-29T17:12:27.000Z',
-              presensi_pulang: '2024-03-29T17:12:34.000Z'
-            },
-            {
-              id_presensi: 6,
-              username: 'erlangftsiesta',
-              nama_lengkap: 'Erlangga Muhammad Hafiz',
-              kelas: 'XI RPL 3',
-              presensi_hadir: '2024-03-29T17:19:25.000Z',
-              presensi_pulang: '2024-03-29T17:19:36.000Z'
-            },
-            // Data tambahan untuk pengujian
-            {
-              id_presensi: 7,
-              username: 'john_doe',
-              nama_lengkap: 'John Doe',
-              kelas: 'XII IPA 1',
-              presensi_hadir: '2024-03-30T08:00:00.000Z',
-              presensi_pulang: '2024-03-30T14:00:00.000Z'
-            },
-            {
-              id_presensi: 8,
-              username: 'jane_doe',
-              nama_lengkap: 'Jane Doe',
-              kelas: 'XII IPA 2',
-              presensi_hadir: '2024-03-30T08:30:00.000Z',
-              presensi_pulang: '2024-03-30T14:30:00.000Z'
+        pool.getConnection(function(err, connection){
+            if (err) {
+                console.error(err);
+                res.status(500).json({ error: 'Kesalahan dalam mendapatkan koneksi dari pool' });
+                return;
             }
-            // Tambah data presensi di sini sesuai kebutuhan untuk pengujian
-          ]))
+            const query = `SELECT * FROM presensi`;
+            connection.query(query, function (err, results) {
+                connection.release(); // Melepaskan koneksi setelah selesai
+
+                res.render("admin/showAbsensi",
+                {
+                    data:encodeURIComponent(JSON.stringify(
+                        results
+                    ))
+                })
+
+                if (err) {
+                    console.error(err);
+                    res.status(500).json({ error: 'Kesalahan dalam eksekusi query' });
+                    return;
+                }
+            })
         })
-    }
+    },
+    tambahSiswa(req, res) {
+        const { nama_lengkap, kelas, status, password } = req.body;
+    
+        // Mendapatkan koneksi dari pool
+        pool.getConnection((err, connection) => {
+            if (err) {
+                console.error('Error saat mengambil koneksi dari pool:', err);
+                return res.status(500).send('Error saat mengambil koneksi dari pool');
+            }
+    
+            // Lakukan INSERT ke tabel login_siswa
+            connection.query('INSERT INTO login_siswa (username, password, status) VALUES (?, ?, ?)', [nama_lengkap, password, status], (err, result) => {
+                if (err) {
+                    connection.release(); // Melepaskan koneksi dari pool
+                    console.error('Error saat menambahkan siswa ke tabel login_siswa:', err);
+                    return res.status(500).send('Error saat menambahkan siswa');
+                }
+    
+                const id_login = result.insertId;
+    
+                // Lakukan INSERT ke tabel data_siswa dengan menggunakan id_login yang didapatkan dari hasil INSERT sebelumnya
+                connection.query('INSERT INTO data_siswa (nama_lengkap, kelas, status, id_login) VALUES (?, ?, ?, ?)', [nama_lengkap, kelas, status, id_login], (err, result) => {
+                    connection.release(); // Melepaskan koneksi dari pool
+    
+                    if (err) {
+                        console.error('Error saat menambahkan siswa ke tabel data_siswa:', err);
+                        return res.status(500).send('Error saat menambahkan siswa');
+                    }
+    
+                    res.status(200).send('Siswa berhasil ditambahkan');
+                });
+            });
+        });
+    },
+    
 }

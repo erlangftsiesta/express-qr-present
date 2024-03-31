@@ -36,18 +36,25 @@ module.exports = {
                     return;
                 }
     
-                connection.query(query, [username, password], function (error, results) {                    if (results.length > 0) {
+                connection.query(query, [username, password], function (error, results) {
+                    if (error) {
+                        // Handle kesalahan query
+                        res.redirect('/login');
+                        return;
+                    }
+                    
+                    if (results.length > 0) {
                         const user = results[0];
                         req.session.loggedin = true;
                         req.session.id_login = user.id_login;
                         req.session.username = user.username;
                         req.session.status = user.status;
     
-                        // Render tampilan yang sesuai berdasarkan status pengguna
+                        // Redirect pengguna ke halaman yang sesuai berdasarkan status pengguna
                         if (user.status === 'ADMIN') {
-                            res.render('admin/homeAdmin');
+                            res.redirect('/admin');
                         } else if (user.status === 'AKTIF') {
-                            res.render('home');
+                            res.redirect('/');
                         } else {
                             // Handle jika status tidak valid
                             res.redirect('/login');
@@ -64,7 +71,7 @@ module.exports = {
         } else {
             res.redirect('/login');
         }
-    },    
+    },        
     // Fungsi untuk logout | Cara memanggilnya menggunakan url/rute 'http://localhost:5050/login/logout'
     logout(req,res){
         // Hapus sesi user dari broser

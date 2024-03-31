@@ -18,11 +18,16 @@ module.exports = {
         }
         res.redirect('/');
     },
-    isAdmin(req, res, next){
-        if(req.session.loggedin === true && req.session.status === 'ADMIN'){
-            next(); // Jika pengguna login dan memiliki status 'admin', lanjutkan
+    isAdminLogin(req, res, next) {
+        // Misalnya, Anda memiliki informasi status pengguna dalam session
+        // Anda dapat memeriksa apakah statusnya adalah "ADMIN" atau tidak
+        if (req.session.loggedin === true){
+            if(req.session.status == 'ADMIN'){
+                next();
+                return;
+            }
         } else {
-            res.redirect('/'); // Jika tidak, redirect ke halaman utama atau halaman lain yang sesuai
+            res.redirect('/login');
         }
     }
 };

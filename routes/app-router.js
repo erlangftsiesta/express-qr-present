@@ -8,7 +8,7 @@ const {homepage, profile} = require('../modelController')
 
 //buat jalur routing
 router.get('/', verifyUser.isLogin, homepage.homepage);
-router.get('/profile', profile.profile);
+router.get('/profile', verifyUser.isLogin, profile.profile);
 router.post('/api/send-change-password', profile.changePassword)
 
 
