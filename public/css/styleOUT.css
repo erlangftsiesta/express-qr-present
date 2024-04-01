@@ -1554,6 +1554,11 @@ html {
   margin: auto;
 }
 
+.mx-11 {
+  margin-left: 2.75rem;
+  margin-right: 2.75rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
