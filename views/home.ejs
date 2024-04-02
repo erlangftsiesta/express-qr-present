@@ -11,5 +11,41 @@
     <div data-theme-toggle class="flex justify-center">
         <h1 class="items-center text-white text-4xl">Hai!, Akunmu sudah terdaftar!</h1>
     </div>
+    <div id="notification">
+
+    </div>
 </body>
+<script>
+window.onload = function() {
+    const today = new Date();
+    const day = today.getDay(); // deklarasikan hari dalam bentuk angka (0 = Minggu, 1 = Senin, selanjutnya itung sendiri bjir)
+    const daysValue = [2, 3, 4];
+
+    // buat element anchor
+    const profileLink = document.createElement('a');
+    profileLink.textContent = 'disini';
+    profileLink.href = '/profile';
+    profileLink.classList.add('text-red-600');
+
+    // buat element paragraph
+    const paragraphElement = document.createElement('p');
+    paragraphElement.textContent = `Kamu memiliki 1 kegiatan yang harus dilakukan, klik `;
+    paragraphElement.appendChild(profileLink); // Tambahin element anchor ke paragraph
+
+    // tambahin paragraph ke dalam div dengan id 'notification'
+    const notificationDiv = document.getElementById('notification');
+    notificationDiv.innerHTML = ''; // Menghapus konten sebelumnya
+
+    // kalo 'hari' adalah Selasa, Rabu, atau Kamis (nilai day = 2, 3, atau 4), tambahkan link ke profil di homepage
+    if (daysValue.includes(day)) {
+        notificationDiv.appendChild(paragraphElement);
+    }
+    else {
+        const notificationDiv = document.getElementById('notification');
+            if (notificationDiv) {
+                notificationDiv.parentNode.removeChild(notificationDiv);
+            }
+    }
+}
+</script>
 </html>

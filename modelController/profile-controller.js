@@ -120,41 +120,80 @@ module.exports = {
                 return;
             }
     
-            // Buat query untuk memeriksa password lama
-            const checkQuery = `SELECT * FROM login_siswa WHERE username = '${oldUsername}' AND password = '${password}'`;
-            
-            // Eksekusi query
-            connection.query(checkQuery, [password, oldUsername], function (err, results) {
-                if (err) {
-                    connection.release(); // Melepaskan koneksi setelah selesai
+            // Mulai transaksi
+            connection.beginTransaction(function(err) {
+                if (err) { 
                     console.error(err);
-                    res.status(500).json({ error: 'Kesalahan dalam eksekusi query' });
+                    res.status(500).json({ error: 'Kesalahan dalam memulai transaksi' });
                     return;
                 }
     
-                // Jika password lama cocok
-                if (results.length > 0) {
-                    // Buat query untuk mengubah password
-                    const updateQuery = `UPDATE login_siswa SET username = '${newUsername}' WHERE id_login = '${id_login}'`;
-                    
-                    // Eksekusi query untuk mengubah password
-                    connection.query(updateQuery, [newUsername, id_login], function (err, results) {
-                        connection.release(); // Melepaskan koneksi setelah selesai
-                        
-                        if (err) {
+                // Buat query untuk memeriksa password lama
+                const checkQuery = `SELECT * FROM login_siswa WHERE username = '${oldUsername}' AND password = '${password}'`;
+    
+                // Eksekusi query
+                connection.query(checkQuery, [password, oldUsername], function (err, results) {
+                    if (err) {
+                        connection.rollback(function() {
+                            connection.release(); // Melepaskan koneksi setelah selesai
                             console.error(err);
-                            req.flash('error', 'Kesalahan dalam mengubah password');
-                        } else {
-                            req.flash('success', 'Password berhasil diubah');
-                        }
-                        res.redirect('/profile?status=success&message=Username%20berhasil%20diubah!');
-                        
-                    });
-                } else {
-                    connection.release(); // Melepaskan koneksi setelah selesai
-                    res.status(400).json({ error: 'Password lama tidak cocok' });
-                }
+                            res.status(500).json({ error: 'Kesalahan dalam eksekusi query' });
+                        });
+                        return;
+                    }
+    
+                    // Jika password lama cocok
+                    if (results.length > 0) {
+                        // Buat query untuk mengubah nama pengguna di tabel login_siswa
+                        const updateUsernameQuery = `UPDATE login_siswa SET username = '${newUsername}' WHERE id_login = '${id_login}'`;
+    
+                        // Eksekusi query untuk mengubah nama pengguna di tabel login_siswa
+                        connection.query(updateUsernameQuery, [newUsername, id_login], function (err, results) {
+                            if (err) {
+                                connection.rollback(function() {
+                                    connection.release(); // Melepaskan koneksi setelah selesai
+                                    console.error(err);
+                                    res.status(500).json({ error: 'Kesalahan dalam mengubah username' });
+                                });
+                                return;
+                            }
+    
+                            // Buat query untuk mengubah nama pengguna di tabel presensi
+                            const updatePresensiQuery = `UPDATE presensi SET username = '${newUsername}' WHERE username = '${oldUsername}'`;
+    
+                            // Eksekusi query untuk mengubah nama pengguna di tabel presensi
+                            connection.query(updatePresensiQuery, [newUsername, oldUsername], function (err, results) {
+                                if (err) {
+                                    connection.rollback(function() {
+                                        connection.release(); // Melepaskan koneksi setelah selesai
+                                        console.error(err);
+                                        res.status(500).json({ error: 'Kesalahan dalam mengubah nama pengguna di tabel presensi' });
+                                    });
+                                    return;
+                                }
+    
+                                connection.commit(function(err) {
+                                    if (err) {
+                                        connection.rollback(function() {
+                                            connection.release(); // Melepaskan koneksi setelah selesai
+                                            console.error(err);
+                                            res.status(500).json({ error: 'Kesalahan dalam menyelesaikan transaksi' });
+                                        });
+                                        return;
+                                    }
+
+                                    connection.release(); // Melepaskan koneksi setelah selesai
+                                    req.flash('success', 'Nama pengguna berhasil diubah');
+                                    res.redirect('/profile?status=success&message=Username%20berhasil%20diubah!');                                });
+                            });
+                        });
+                    } else {
+                        connection.release(); // Melepaskan koneksi setelah selesai
+                        res.status(400).json({ error: 'Password lama tidak cocok' });
+                    }
+                });
             });
         });
     }
+    
 }

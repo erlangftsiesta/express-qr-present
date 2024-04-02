@@ -31,11 +31,14 @@
       <div class="flex justify-center text-6xl text-white text-sans">Admin</div>
 
       <!-- Tampilkan list data siswa -->
-      <div class="flex justify-center items-center">
+      <div class="flex flex-wrap justify-between">
         <div id="data_siswa">
-          
+
         </div>
       </div>
+      <div id="pagination">
+
+      </div> <br> <br> <br> <br> <br> <br>
   </section>
 
       
@@ -56,43 +59,43 @@
       </div>
       <script>
         window.onload = function() {
-          const data_siswa = JSON.parse(decodeURIComponent(`<%= data %>`))
+          const data_siswa = JSON.parse(decodeURIComponent(`<%= data %>`)); // Menambahkan JSON.stringify karena Anda mengirimkan objek JavaScript, bukan string JSON
           const dataSiswaContainer = document.getElementById('data_siswa');
-    
+      
           // Function to render presensi data
           function renderPresensiData(startIndex, endIndex) {
             dataSiswaContainer.innerHTML = ''; // Clear previous data
-    
+      
             for (let i = startIndex; i < endIndex; i++) {
               const data = data_siswa[i];
               const data_siswaElement = document.createElement('div');
               data_siswaElement.classList.add('border', 'border-gray-200', 'p-4', 'mb-4', 'rounded-md', 'shadow-md');
-  
+      
               data_siswaElement.innerHTML = `
-              <p><strong>ID:</strong> ${data.id_siswa}</p>
+                <p><strong>ID:</strong> ${data.id_siswa}</p>
                 <p><strong>Nama Lengkap:</strong> ${data.nama_lengkap}</p>
                 <p><strong>Kelas:</strong> ${data.kelas}</p>
-                <p><strong>Kelas:</strong> ${data.status}</p>
+                <p><strong>Status:</strong> ${data.status}</p>
               `;
-    
+      
               dataSiswaContainer.appendChild(data_siswaElement);
             }
           }
-    
+      
           // Initial rendering
           const itemsPerPage = 10;
           let currentPage = 1;
           const totalPages = Math.ceil(data_siswa.length / itemsPerPage);
           renderPresensiData(0, itemsPerPage);
-    
+      
           // Function to handle pagination click
           function handlePaginationClick(page) {
             currentPage = page;
             const startIndex = (currentPage - 1) * itemsPerPage;
-            const endIndex = Math.min(startIndex + itemsPerPage, presensiData.length);
+            const endIndex = Math.min(startIndex + itemsPerPage, data_siswa.length); // Mengubah 'presensiData.length' menjadi 'data_siswa.length'
             renderPresensiData(startIndex, endIndex);
           }
-    
+      
           // Render pagination buttons
           const paginationContainer = document.getElementById('pagination');
           for (let i = 1; i <= totalPages; i++) {
@@ -102,6 +105,6 @@
             paginationContainer.appendChild(pageButton);
           }
         }
-      </script>
+      </script>      
   </body>
   </html>
