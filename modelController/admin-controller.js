@@ -1,8 +1,8 @@
 const connection = require('../configs/database'); 
-
-const csv        = require('fast-csv');
 const mysql      = require('mysql');
 const pool       = mysql.createPool(connection);
+
+const { csv } = require('../middleware/exporter');
 
 pool.on('error',(err)=> {
     console.error(err);
