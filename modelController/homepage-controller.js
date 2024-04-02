@@ -20,6 +20,7 @@ module.exports = {
                 if (error) throw error;
                 if (results.length > 0) {
                     const status = results[0]['status'];
+                    const username = results[0]['username'];
                     if (status == 'AKTIF'){
                         const user = results[0];
                         req.session.loggedin = true;
@@ -29,6 +30,7 @@ module.exports = {
                             colorFlash: req.flash('color'),
                             statusFlash: req.flash('status'),
                             pesanFlash: req.flash('message'),
+                            username: username
                         });
                     }
                 }
