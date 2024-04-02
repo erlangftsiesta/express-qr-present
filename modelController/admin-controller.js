@@ -1,5 +1,6 @@
 const connection = require('../configs/database'); 
 
+const csv        = require('fast-csv');
 const mysql      = require('mysql');
 const pool       = mysql.createPool(connection);
 
@@ -37,7 +38,6 @@ module.exports = {
     pageTambahDataSiswa(req, res){
         //BACKEND DEVELOPERNYA TEWAS MENGENASKAN 💀
     },
-    
     scan(req,res) {
         res.render("admin/scan",{
         })
@@ -128,39 +128,38 @@ module.exports = {
             })
         })
     },
-    tambahSiswa(req, res) {
-        const { nama_lengkap, kelas, status, password } = req.body;
-    
-        // Mendapatkan koneksi dari pool
-        pool.getConnection((err, connection) => {
+    exportDataPresensi(req, res){
+        try {
+          // Your custom SQL query to fetch data from the database
+          const sqlQuery = "SELECT * FROM presensi"; // Ganti dengan nama tabel Anda
+      
+          // Mendapatkan koneksi dari pool
+          pool.getConnection(function(err, connection) {
             if (err) {
-                console.error('Error saat mengambil koneksi dari pool:', err);
-                return res.status(500).send('Error saat mengambil koneksi dari pool');
+                console.error(err);
+                return res.status(500).json({ error: 'Kesalahan dalam mendapatkan koneksi dari pool' });
             }
-    
-            // Lakukan INSERT ke tabel login_siswa
-            connection.query('INSERT INTO login_siswa (username, password, status) VALUES (?, ?, ?)', [nama_lengkap, password, status], (err, result) => {
-                if (err) {
-                    connection.release(); // Melepaskan koneksi dari pool
-                    console.error('Error saat menambahkan siswa ke tabel login_siswa:', err);
-                    return res.status(500).send('Error saat menambahkan siswa');
-                }
-    
-                const id_login = result.insertId;
-    
-                // Lakukan INSERT ke tabel data_siswa dengan menggunakan id_login yang didapatkan dari hasil INSERT sebelumnya
-                connection.query('INSERT INTO data_siswa (nama_lengkap, kelas, status, id_login) VALUES (?, ?, ?, ?)', [nama_lengkap, kelas, status, id_login], (err, result) => {
-                    connection.release(); // Melepaskan koneksi dari pool
-    
-                    if (err) {
-                        console.error('Error saat menambahkan siswa ke tabel data_siswa:', err);
-                        return res.status(500).send('Error saat menambahkan siswa');
-                    }
-    
-                    res.redirect('/')
-                });
+      
+            // Eksekusi query untuk mengambil data dari database
+            connection.query(sqlQuery, (err, results) => {
+              connection.release(); // Melepaskan koneksi setelah selesai digunakan
+              if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Kesalahan dalam mengambil data dari database' });
+              }
+      
+              // Mengatur header untuk tipe konten dan nama file
+              res.setHeader("Content-Type", "text/csv");
+              res.setHeader("Content-Disposition", "attachment; filename="+"absen.csv");
+      
+              // Menulis data CSV ke respons dan mengirimkannya
+              csv.write(results, {headers: true}).pipe(res);
             });
-        });
-    },    
+          });
+        } catch (err) {
+          console.error("Error occurred:", err);
+          res.status(500).send("An error occurred during the export process.");
+        }
+      },      
     
 }

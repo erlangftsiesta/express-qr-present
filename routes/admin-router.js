@@ -8,10 +8,11 @@ const { admin } = require('../modelController');
 // router.get('/', verifyUser.isAdmin, homepageController.homepage);
 
 router.get('/', verifyUser.isAdminLogin, admin.homepageAdmin);
-router.get('/scan', verifyUser.isAdminLogin, admin.scan);
 router.get('/show', verifyUser.isAdminLogin, admin.showPresensi);
+router.get('/export', verifyUser.isAdminLogin, admin.exportDataPresensi);
+router.get('/scan', verifyUser.isAdminLogin, admin.scan);
 router.post('/api/send', verifyUser.isAdminLogin, admin.APIScan);
-router.post('/api/send/tambah-data-siswa', admin.tambahSiswa);
+// router.post('/api/send/tambah-data-siswa', admin.tambahSiswa);
 
 
 module.exports = router 

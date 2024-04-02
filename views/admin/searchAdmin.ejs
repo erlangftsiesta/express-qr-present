@@ -1,0 +1,42 @@
+<!-- searchAdmin.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Admin Page</title>
+    <!-- Tambahkan link CSS Tailwind atau CSS lainnya -->
+    <link rel="stylesheet" href="/css/styleOUT.css">
+</head>
+<body class="bg-gray-100 p-4">
+    <div class="max-w-md mx-auto">
+        <h1 class="text-2xl font-bold mb-4">Search Admin Page</h1>
+        
+        <!-- Form untuk input query -->
+        <form action="/admin/search" method="GET" class="mb-4">
+            <label for="querySearch" class="block mb-2">Input Data:</label>
+            <div class="flex">
+                <input type="text" id="querySearch" name="querySearch" class="w-full mr-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Search</button>
+            </div>
+        </form>
+
+        <!-- Tabel hasil pencarian -->
+        <table class="w-full border-collapse border border-gray-300">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 bg-gray-200 border border-gray-300">Nama Lengkap</th>
+                    <th class="px-4 py-2 bg-gray-200 border border-gray-300">Kelas</th>
+                    <th class="px-4 py-2 bg-gray-200 border border-gray-300">Presensi Hadir</th>
+                    <th class="px-4 py-2 bg-gray-200 border border-gray-300">Presensi Pulang</th>
+                    <!-- Tambahkan kolom-kolom lain sesuai kebutuhan -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Tabel akan diisi oleh hasil pencarian dari server -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
