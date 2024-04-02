@@ -7,14 +7,21 @@
     <link rel="stylesheet" href="/css/styleOUT.css">
     <link rel="stylesheet" href="/css/input.css">
 </head>
-<body class="bg-slate-800">
-    <div data-theme-toggle class="flex justify-center">
-        <h1 class="items-center text-white text-4xl">Hai!, Akunmu sudah terdaftar!</h1>
-    </div>
-    <div id="notification">
+<body>
+    <nav class="bg-sky-400 h-10">
+        <div>
+            <img src="/image/profilepicture.jpeg" alt="profilepicture" class="w-11 float-end flex pr-1" >
+            <div class="flex ml-3 items-center text-2xl font-semibold font-sans text-blue-900">
+                HOME
+            </div>
+        </div>
+    </nav>
 
-    </div>
-    <h1>HALO SELAMAT DATANG, <b>@<%= username  %></b></h1>
+   <div id="notification">
+   </div>
+   <div class="font-bold text-7xl justify-center my-40 text-white flex">
+    Halo selamat datang <br> <%= username%> 
+</div>
 </body>
 <script>
 window.onload = function() {
