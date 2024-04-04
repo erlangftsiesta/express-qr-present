@@ -8,20 +8,34 @@
     <link rel="stylesheet" href="/css/input.css">
 </head>
 <body>
-    <nav class="bg-sky-400 h-10">
+    <nav class="bg-cyan-400 h-10">
         <div>
-            <img src="/image/profilepicture.jpeg" alt="profilepicture" class="w-11 float-end flex pr-1" >
-            <div class="flex ml-3 items-center text-2xl font-semibold font-sans text-blue-900">
+            <img src="/image/removePicture.png" alt="profilepicture" class="w-11 float-end flex pr-1" >
+            <div class="flex ml-3 items-center text-2xl font-semibold text-white">
                 HOME
             </div>
         </div>
     </nav>
 
-   <div id="notification">
-   </div>
-   <div class="font-bold text-7xl justify-center my-40 text-white flex">
+    <div class="font-bold text-7xl justify-center my-40 text-white flex">
     Halo selamat datang <br> <%= username%> 
-</div>
+    </div>
+
+    <div class="max-w-sm w-full bg-white shadow-md rounded-2xl overflow-hidden">
+        <!-- Header Notifikasi -->
+        <div class="bg-cyan-400 px-4 py-2">
+            <h2 class="text-white font-bold">Notification</h2>
+        </div>
+        <!-- Isi Notifikasi -->
+        <div class="p-4">
+           <div id="notification" class="text-lg text-gray-700 font-bold"></div>
+        </div>
+        <!-- Footer Notifikasi -->
+        <div class="bg-cyan-400 px-4 py-2 flex justify-end">
+            <!-- Tombol Tutup -->
+            <button id="closeButton" class="text-lg font-semibold text-white hover:text-blue-800">Tutup</button>
+        </div>
+    </div>
 </body>
 <script>
 window.onload = function() {
@@ -33,7 +47,7 @@ window.onload = function() {
     const profileLink = document.createElement('a');
     profileLink.textContent = 'disini';
     profileLink.href = '/profile';
-    profileLink.classList.add('text-red-600');
+    profileLink.classList.add('text-cyan-400');
 
     // buat element paragraph
     const paragraphElement = document.createElement('p');
@@ -54,6 +68,19 @@ window.onload = function() {
                 notificationDiv.parentNode.removeChild(notificationDiv);
             }
     }
+    function closeNontification() {
+        const nontification = document.getElementById('nontification');
+        nontification.parentNode.removeChild(nontification);
+    }
+    function closeNotification() {
+            const notification = document.querySelector('.max-w-sm');
+            notification.style.display = 'none'; // Mengubah tampilan notifikasi menjadi tidak terlihat
+           
+    }
+     // Menambahkan event listener untuk tombol tutup
+     document.getElementById('closeButton').addEventListener('click', closeNotification);
+
+       
 }
 </script>
 </html>
