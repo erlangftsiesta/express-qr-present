@@ -86,6 +86,14 @@
     function filterData() {
       const searchTerm = searchInput.value.toLowerCase();
       const searchDateValue = searchDate.value;
+
+      const isValidDate = (dateString) => {
+        const dateObject = new Date(dateString);
+        return !isNaN(dateObject.getTime());
+      };
+      if(searchDateValue && !isValidDate(searchDateValue)){
+        return;
+      }
   
       filteredData = presensiData.filter(presensi => {
         const presensiHadirDate = new Date(presensi.presensi_hadir);

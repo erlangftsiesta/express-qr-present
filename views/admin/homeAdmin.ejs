@@ -27,18 +27,18 @@
     </nav>
 
     <section id="Beranda">
-      <h1 class="mt-56 flex justify-center text-6xl text-white text-sans">Selamat Datang</h1>
-      <div class="flex justify-center text-6xl text-white text-sans">Admin</div>
+      <h1 class="mt-8 flex justify-center text-6xl text-white text-sans">Selamat Datang</h1>
+      <div class="flex justify-center text-6xl text-white text-sans">Admin</div> <br><br><br>
 
       <!-- Tampilkan list data siswa -->
-      <div class="flex flex-wrap justify-between">
-        <div id="data_siswa">
-
+      <div class="flex flex-wrap justify-center">
+        <div id="data_siswa" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 mx-auto">
+          
         </div>
-      </div>
-      <div id="pagination">
-
-      </div> <br> <br> <br> <br> <br> <br>
+      </div>      
+      <div class="flex justify-center mt-4">
+        <div id="pagination" class="flex space-x-2 text-white text-xl"></div>
+      </div><br> <br> <br> <br>
   </section>
 
       
@@ -83,7 +83,7 @@
           }
       
           // Initial rendering
-          const itemsPerPage = 10;
+          const itemsPerPage = 12;
           let currentPage = 1;
           const totalPages = Math.ceil(data_siswa.length / itemsPerPage);
           renderPresensiData(0, itemsPerPage);
