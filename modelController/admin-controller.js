@@ -24,7 +24,7 @@ module.exports = {
                 {
                     data:encodeURIComponent(JSON.stringify(
                         results
-                    ))
+                    ), console.log(results))
                 })
 
                 if (err) {
@@ -36,7 +36,18 @@ module.exports = {
         })
     },
     pageTambahDataSiswa(req, res){
+        res.render("admin/addSiswa")
+    },
+    APIAddDataSiswa(req, res){
         //BACKEND DEVELOPERNYA TEWAS MENGENASKAN 💀
+        pool.getConnection(function(error, connection){
+            if (error){
+                console.error(error);
+                res.status(500).json({error: 'Kesalahan Koneksi POOL'});
+                return;
+            }
+            // const = `SELECT * FROM ... WHERE`
+        })
     },
     scan(req,res) {
         res.render("admin/scan",{
@@ -160,6 +171,6 @@ module.exports = {
           console.error("Error occurred:", err);
           res.status(500).send("An error occurred during the export process.");
         }
-      },      
+    },      
     
 }

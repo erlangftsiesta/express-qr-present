@@ -58,7 +58,7 @@
 										}
 										Sudah.push(username);
 										// LOGIKA LOGIN MU DI SINI, KU SARANIN BUAT API ENDPOINT DI ADMIN
-										fetch("./api/send", {
+										fetch("./api/send-data-scan", {
 											body: JSON.stringify({ username, kelas, nama }),
 											method: "POST",
 											headers: {
