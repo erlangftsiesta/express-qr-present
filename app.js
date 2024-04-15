@@ -13,11 +13,13 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     secret: 'devacctoRPL',
-    name: 'secretName',
+    name: 'secretName', 
     cookie: {
-        sameSite: true,
-        maxAge: 1*60*60*24*7*1000
-    },
+        httpOnly: true, // hengker kelas teri mainnya xss via input, cuihhh
+        // secure: true, // lo ga secure? gabisa masuk bosss!
+        sameSite: 'strict', // Mau nembak pake Cookies Value? MAIN LU KURANG JAGO AHHH 😎
+        maxAge: 1 * 60 * 60 * 24 * 7 * 1000
+    }
 }));
 
 //Konfigurasi pesan Flash (library flash)
