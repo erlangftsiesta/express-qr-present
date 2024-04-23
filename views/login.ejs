@@ -6,11 +6,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/styleOUT.css">
     <link rel="stylesheet" href="/css/input.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@5/dark.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 </head>
-<body>
+<body class="bg-discordPallet1">
   <div class="flex h-screen items-center justify-center">
     <div class="w-full max-w-md">
-        <div class="bg-blue-900 rounded-xl shadow-xl p-6">
+        <div class="bg-discordPallet3 rounded-xl shadow-xl p-6">
             <div class="flex mb-6">
                 <div class="bg-custom-blue h-8 w-8 flex items-center justify-center rounded-full mr-2">
                     <svg class="text-white h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -21,31 +23,56 @@
                     Login Your Account!
                 </div>
             </div>
-            <form class="mb-4" action="login/auth" method="POST">
+            <form class="mb-4" action="/login/api/send-login" method="POST">
                 <div class="mb-4">
                     <div class="block text-white font-bold mb-2" for="username">
                         Username
                     </div>
-                    <input name="username" class="w-full border-b-2 text-white bg-blue-900 rounded-md pl-4"  id="username" type="text">
+                    <input name="username" class="w-full border-b-2 text-white bg-discordPallet3 rounded-md pl-4"  id="username" type="text">
                 </div>
                 <div class="mb-4">
                     <div class="block text-white font-bold mb-2" for="password">
                         Password
                     </div>
-                    <input name="pass" class="w-full border-b-2 text-white text-lg bg-blue-900 rounded-md pl-4"  id="password" type="password">
+                    <input name="password" class="w-full border-b-2 text-white text-lg bg-discordPallet3 rounded-md pl-4"  id="password" type="password">
                 </div>
                 <div class=" justify-between mb-2">
                     <select id="underline_select" name="stats" class="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-300 dark:border-white focus:outline-none focus:ring-0 focus:border-white peer">
-                        <option class="" name="stats" value="AKTIF" selected>User (AKTIF)</option>
+                        <option class="" name="stats" value="AKTIF" selected>ANGGOTA DEVACCTO RPL</option>
                         <option name="stats" value="ADMIN">Administrator</option>
                     </select>
                 </div>
-                <button type="text" class="bg-teal-500 hover:bg-cyan-600 text-white font-bold py-2 px-40 rounded focus:outline-none focus:shadow-outline flex mx-auto">
+                <button type="submit" class="bg-teal-500 hover:bg-cyan-600 text-white font-bold py-2 px-40 rounded focus:outline-none focus:shadow-outline flex mx-auto">
                     Login
                 </button>
             </form>
         </div>
     </div>
 </div>
+<script src="sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="/js/sweetalert2-changeData.js"></script>
+<script>
+        function login() {
+        const username = document.querySelector('input[name="username"]').value;
+        const password = document.getElementById('password').value;
+        const status = document.getElementById('underline_select').value;
+
+        fetch("/api/send-login", {
+            body: JSON.stringify({ username, password, status }),
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((res) => {
+            res.json().then((data) => {
+                if (data.success) {
+                    alert(data.message); // Notifikasi jika berhasil
+                } else {
+                    alert(data.error); // Notifikasi jika gagal
+                }
+            });
+        });
+    }
+</script>
 </body>
 </html>

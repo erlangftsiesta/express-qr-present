@@ -3,5 +3,5 @@ module.exports = {
     host               : 'localhost',
     user               : 'root',
     password           : '',
-    database           : 'devaccto'
+    database           : 'qr_present-testing'
 }

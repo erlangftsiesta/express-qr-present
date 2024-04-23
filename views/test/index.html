@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<!-- Untuk PC -->
+<div class="fixed bottom-0 left-0 mb-4 ml-4 hidden md:block"> <!-- Mengatur notifikasi di pojok kiri bawah untuk PC -->
+    <div class="relative bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md"> <!-- Desain notifikasi -->
+        Ini adalah notifikasi untuk PC
+        <button class="absolute top-0 right-0 px-3 py-1 text-sm text-white">&times;</button> <!-- Tombol x di pojok kanan atas -->
+    </div>
+</div>
+
+<!-- Untuk HP -->
+<div class="fixed bottom-0 left-0 right-0 mb-4 mx-4 md:hidden"> <!-- Mengatur notifikasi di tengah bawah untuk HP -->
+    <div class="relative bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md"> <!-- Desain notifikasi -->
+        Ini adalah notifikasi untuk HP
+        <button class="absolute top-0 right-0 px-3 py-1 text-sm text-white">&times;</button> <!-- Tombol x di pojok kanan atas -->
+    </div>
+</div>
+</body>

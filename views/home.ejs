@@ -7,59 +7,81 @@
     <link rel="stylesheet" href="/css/styleOUT.css">
     <link rel="stylesheet" href="/css/input.css">
     <link rel="stylesheet" href="/css/custom.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="scroll-smooth">
-    <div class="flex min-h-screen bg-gray-900">
-        <div class="fixed top-0 left-0 w-full h-16 bg-blue-900 shadow-md flex items-center justify-between px-4">
-            <h1 class="text-white font-semibold text-xl">MyApps</h1>
-                <ul class="flex space-x-4">
-                <li><a href="#" class="text-white font-semibold text-xl hover:text-gray-500">Profile</a></li>
-                <li><a href="#" class="text-white font-semibold text-xl hover:text-gray-500">Contact</a></li>
-                </ul>
-        </div>
+    <div class="flex min-h-screen bg-discordPallet1">
+        <div class="fixed top-0 left-0 w-full h-16 bg-discordPallet3 shadow-md flex items-center justify-between px-4">
+            <h1 class="font-semibold text-fontLogoColor hidden md:block">MyQR Presensi</h1>
+            <a href="/"><img src="/image/logo-MyQR-Presensi.png" alt="Logo" class="w-24 h-8 md:hidden"></a>
+            <a href="/profile"><img src="/svg/profile.svg" alt="Profile" class="w-8 h-8"></a>
+        </div>        
         <div class="flex-grow px-4 pt-16 mt-16">
             <div class="flex justify-center items-center mb-7 text-4xl italic text-white">
                 Quotes Of The Day
             </div>
             <div class="flex flex-col mx-auto w-full md:w-1/2 lg:w-1/2">
-              <div class="flex flex-col bg-blue-900 shadow-sm rounded-lg overflow-hidden">
+              <div class="flex flex-col bg-discordPallet3 shadow-sm rounded-lg overflow-hidden">
                 <div class="p-4 flex flex-col space-y-2">
                 <p id="quote" class="pl-4 text-white text-lg italic"></p>
                 <p id="author" class="flex justify-end text-lg text-white"></p>
             </div>
         </div>            
-        <div class="flex justify-center text-lg text-gray-50 mt-4">Selamat Datang Kembali, @<%= username%></div>
-    </div>
-        <div id="popup" class="flex mt-14 overflow-hidden fixed duration-1000">
-            <div id="notif" class="mt-2 w-full max-w-xs mx-auto p-4 text-gray-900 rounded-lg bg-yellow-500 ;" role="alert">
-                <div class="flex items-center mb-3">
-                    <span class="mb-1 text-xl font-semibold text-gray-900 dark:text-white">Notification</span>
-                    <button id="btnClose" class="ms-auto -mx-1.5 -my-1.5 bg-white justify-center items-center flex-shrink-0 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
-                        <span class="sr-only">Close</span>
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="flex items-center">
-                    <div class="relative inline-block shrink-0">
-                                   <span class="absolute bottom-0 right-0 inline-flex items-center justify-center w-6 h-6 bg-blue-600 rounded-full">
-                            <svg class="w-3 h-3 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 18" fill="currentColor">
-                                <path d="M18 4H16V9C16 10.0609 15.5786 11.0783 14.8284 11.8284C14.0783 12.5786 13.0609 13 12 13H9L6.846 14.615C7.17993 14.8628 7.58418 14.9977 8 15H11.667L15.4 17.8C15.5731 17.9298 15.7836 18 16 18C16.2652 18 16.5196 17.8946 16.7071 17.7071C16.8946 17.5196 17 17.2652 17 17V15H18C18.5304 15 19.0391 14.7893 19.4142 14.4142C19.7893 14.0391 20 13.5304 20 13V6C20 5.46957 19.7893 4.96086 19.4142 4.58579C19.0391 4.21071 18.5304 4 18 4Z" fill="currentColor"/>
-                                <path d="M12 0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V9C0 9.53043 0.210714 10.0391 0.585786 10.4142C0.960859 10.7893 1.46957 11 2 11H3V13C3 13.1857 3.05171 13.3678 3.14935 13.5257C3.24698 13.6837 3.38668 13.8114 3.55279 13.8944C3.71889 13.9775 3.90484 14.0126 4.08981 13.996C4.27477 13.9793 4.45143 13.9114 4.6 13.8L8.333 11H12C12.5304 11 13.0391 10.7893 13.4142 10.4142C13.7893 10.0391 14 9.53043 14 9V2C14 1.46957 13.7893 0.960859 13.4142 0.585786C13.0391 0.210714 12.5304 0 12 0Z" fill="currentColor"/>
-                                </svg>
-                            <span class="sr-only">Message icon</span>
-                        </span>
-                    </div>
-                    <div class="ms-3 text-sm font-normal">
-                        <div class="text-xl font-semibold text-gray-900 dark:text-gray-50">Task</div>
-                        <div id="notification" class="text-sm font-semibold text-gray-50"></div>
-                    </div>
-                </div>
+        <div class="flex justify-center text-lg text-gray-50 mt-4">Selamat Datang Kembali,&nbsp;<b> @<%= username %></b></div>
         </div>
-</div>
+        <div id="parentPopUp" class="hidden">
+            <!-- Notification Pop Up for PC -->
+                <div id="popupDekstop" class="fixed bottom-0 left-0 mb-4 ml-4 hidden md:block">
+                    <div id="notif" class="relative mt-2 w-full max-w-xs mx-auto p-4 text-gray-900 rounded-lg bg-yellow-600 ;" role="alert">
+                        <div class="flex items-center mb-3">
+                            <span class="mb-1 text-xl font-semibold text-gray-900 dark:text-white">Notification</span>
+                            <button id="btnCloseDekstop" class="ms-auto -mx-1.5 -my-1.5 bg-white justify-center items-center flex-shrink-0 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
+                                <span class="sr-only">Close</span>
+                                <img src="/svg/cross.svg" type="svg" alt="">
+                            </button>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="relative inline-block shrink-0">
+                                <span class="absolute bottom-0 right-0 inline-flex items-center justify-center w-6 h-6 bg-blue-600 rounded-full">
+                                    <svg class="w-3 h-3 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 18" fill="currentColor">
+                                        <path d="M18 4H16V9C16 10.0609 15.5786 11.0783 14.8284 11.8284C14.0783 12.5786 13.0609 13 12 13H9L6.846 14.615C7.17993 14.8628 7.58418 14.9977 8 15H11.667L15.4 17.8C15.5731 17.9298 15.7836 18 16 18C16.2652 18 16.5196 17.8946 16.7071 17.7071C16.8946 17.5196 17 17.2652 17 17V15H18C18.5304 15 19.0391 14.7893 19.4142 14.4142C19.7893 14.0391 20 13.5304 20 13V6C20 5.46957 19.7893 4.96086 19.4142 4.58579C19.0391 4.21071 18.5304 4 18 4Z" fill="currentColor"/>
+                                        <path d="M12 0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V9C0 9.53043 0.210714 10.0391 0.585786 10.4142C0.960859 10.7893 1.46957 11 2 11H3V13C3 13.1857 3.05171 13.3678 3.14935 13.5257C3.24698 13.6837 3.38668 13.8114 3.55279 13.8944C3.71889 13.9775 3.90484 14.0126 4.08981 13.996C4.27477 13.9793 4.45143 13.9114 4.6 13.8L8.333 11H12C12.5304 11 13.0391 10.7893 13.4142 10.4142C13.7893 10.0391 14 9.53043 14 9V2C14 1.46957 13.7893 0.960859 13.4142 0.585786C13.0391 0.210714 12.5304 0 12 0Z" fill="currentColor"/>
+                                    </svg>
+                                    <span class="sr-only">Message icon</span>
+                                </span>
+                            </div>
+                            <div class="ms-3 text-sm font-normal">
+                                <div class="text-xl font-semibold text-gray-900 dark:text-gray-50">Task</div>
+                                <div id="notification" class="text-sm font-semibold text-gray-50">Kamu mempunyai 1 kegiatan yang membutuhkan QR untuk melakukan Presensi. Klik <a style="font-weight: bold !important;" href="/profile">Disini</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- Notification Pop Up for Hape -->
+                <div id="popupMobile" class="fixed bottom-0 left-0 right-0 mb-4 mx-4 md:hidden">
+                    <div class="relative bg-yellow-600 text-white px-4 py-2 rounded-lg shadow-md text-medium text-md">
+                        SCAN QR sebagai presensi kehadiran <a class="text-bold" style="font-weight: bold !important;" href="/profile">Disini!</a>
+                        <button id="btnCloseMobile" class="absolute top-0 right-0 px-3 py-1 -mt-1.5 -mr-1.5 bg-white justify-center items-center flex-shrink-0 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
+                            <span class="sr-only">Close</span>
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                        </button>
+                        <div class="absolute bottom-0 top-1 left-0 transform -translate-x-1/2">
+                            <span class="inline-flex items-center justify-center w-6 h-6 bg-blue-600 rounded-full">
+                                <svg class="w-3 h-3 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 18" fill="currentColor">
+                                    <path d="M18 4H16V9C16 10.0609 15.5786 11.0783 14.8284 11.8284C14.0783 12.5786 13.0609 13 12 13H9L6.846 14.615C7.17993 14.8628 7.58418 14.9977 8 15H11.667L15.4 17.8C15.5731 17.9298 15.7836 18 16 18C16.2652 18 16.5196 17.8946 16.7071 17.7071C16.8946 17.5196 17 17.2652 17 17V15H18C18.5304 15 19.0391 14.7893 19.4142 14.4142C19.7893 14.0391 20 13.5304 20 13V6C20 5.46957 19.7893 4.96086 19.4142 4.58579C19.0391 4.21071 18.5304 4 18 4Z" fill="currentColor"/>
+                                    <path d="M12 0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V9C0 9.53043 0.210714 10.0391 0.585786 10.4142C0.960859 10.7893 1.46957 11 2 11H3V13C3 13.1857 3.05171 13.3678 3.14935 13.5257C3.24698 13.6837 3.38668 13.8114 3.55279 13.8944C3.71889 13.9775 3.90484 14.0126 4.08981 13.996C4.27477 13.9793 4.45143 13.9114 4.6 13.8L8.333 11H12C12.5304 11 13.0391 10.7893 13.4142 10.4142C13.7893 10.0391 14 9.53043 14 9V2C14 1.46957 13.7893 0.960859 13.4142 0.585786C13.0391 0.210714 12.5304 0 12 0Z" fill="currentColor"/>
+                                </svg>
+                                <span class="sr-only">Message icon</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>                
+        </div>
     </div>
-    <!-- <script src="/js/quote.js"></script> -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
 const quotes = [
     { quote: "Ilmu adalah cahaya yang menerangi jalan menuju kebijaksanaan.", author: "Unknown People" },
@@ -99,56 +121,44 @@ const quotes = [
             authorElement.textContent = randomQuote.author;
         });
     </script>
-<script>
-window.onload = function() {
-    const today = new Date();
-    const day = today.getDay(); // deklarasikan hari dalam bentuk angka (0 = Minggu, 1 = Senin, selanjutnya itung sendiri bjir)
-    const daysValue = [2, 3, 1];
+    <script>
+    window.onload = function() {
+        const today = new Date();
+        const day = today.getDay(); // deklarasikan hari dalam bentuk angka (0 = Minggu, 1 = Senin, selanjutnya itung sendiri bjir)
+        const daysValue = [2, 3, 4];
 
-    // buat element anchor
-    const profileLink = document.createElement('a');
-    profileLink.textContent = 'disini';
-    profileLink.href = '/profile';
-    profileLink.classList.add('text-blue-600');
+        const parentPopUp = document.getElementById("parentPopUp")
+        const popupDesktop = document.getElementById("popupDekstop")
+        const popupMobile = document.getElementById("popupMobile")
 
-    // buat element paragraph
-    const paragraphElement = document.createElement('p');
-    paragraphElement.textContent = `Kamu memiliki 1 kegiatan yang harus dilakukan, klik `;
-    paragraphElement.appendChild(profileLink); // Tambahin element anchor ke paragraph
-
-    // tambahin paragraph ke dalam div dengan id 'notification'
-    const notificationDiv = document.getElementById('notification');
-    notificationDiv.innerHTML = ''; // Menghapus konten sebelumnya
-
-    // kalo 'hari' adalah Selasa, Rabu, atau Kamis (nilai day = 2, 3, atau 4), tambahkan link ke profil di homepage
-    if (daysValue.includes(day)) {
-        notificationDiv.appendChild(paragraphElement);
-    }
-    else {
-        const notificationDiv = document.getElementById('notif');
-            if (notificationDiv) {
-                notificationDiv.parentNode.removeChild(notificationDiv);
+        // kalo 'hari' adalah Selasa, Rabu, atau Kamis (nilai day = 2, 3, atau 4), tambahkan link ke profil di homepage
+        if (daysValue.includes(day)) {
+            parentPopUp.classList.remove('hidden')
+        }
+        else {
+            if(parentPopUp){
+                parentPopUp.remove();
             }
+        };
+    
+        function closeNotification() {
+                const notification = document.querySelector('.max-w-xs');
+                notification.style.display = 'none'; // Mengubah tampilan notifikasi menjadi tidak terlihat
+        }
+        // Menambahkan event listener untuk tombol tutup
+        document.getElementById('btnCloseDekstop').addEventListener('click', closeNotification);
+        document.getElementById('btnCloseMobile').addEventListener('click', closeNotification);
+
+        function hidePopup() {
+        }
+
+        function showPopup() {
+            // parentPopUp.classList.remove('hidden')
+            popupMobile.classList.add('show-popup')
+            popupDesktop.classList.add('show-popup')
+        }
+        showPopup();
     }
-  
-    function closeNotification() {
-            const notification = document.querySelector('.max-w-xs');
-            notification.style.display = 'none'; // Mengubah tampilan notifikasi menjadi tidak terlihat
-           
-    }
-     // Menambahkan event listener untuk tombol tutup
-     document.getElementById('btnClose').addEventListener('click', closeNotification);
-
-     const popup = document.getElementById('popup')
-
-     function showPopup() {
-        popup.classList.remove('hidden')
-        popup.classList.add('show-popup')
-
-        setTimeout(hidePopup, 5000);
-     }
-     showPopup();
-}
-</script>
+    </script>
 </body>
 </html>

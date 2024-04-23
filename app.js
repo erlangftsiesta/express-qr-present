@@ -32,7 +32,8 @@ app.use((req, res, next) => {
 // Definisikan view engine, folder views dan format penampil HTML
 app.set('views', [
     path.join(__dirname, 'views'),
-    path.join(__dirname, 'views/admin') // Menambahkan path untuk folder 'admin'
+    path.join(__dirname, 'views/admin'), // Menambahkan path untuk folder 'admin'
+    path.join(__dirname, 'views/test') //Menambahkan path untuk folder 'test'
 ]);
 app.set('view engine', 'ejs'); //view engine menggunakan EJS
 
@@ -42,7 +43,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 // Configurasi dan gunakan library
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false })); 
 app.use(express.json())
 
 //HANDLE WITH CARE!
@@ -52,9 +53,11 @@ app.use(express.json())
 const loginRoute = require('./routes/login-router');
 const appRoute = require('./routes/app-router')
 const adminRoute = require('./routes/admin-router');
+const logoutRoute = require('./routes/logout-router')
 
 //Konfigurasi routes yang telah di deklarasikan
 app.use('/login', loginRoute);
+app.use('/logout', logoutRoute)
 app.use('/admin', adminRoute);
 app.use('/', appRoute);
 

@@ -94,16 +94,15 @@ module.exports = {
                         
                         if (err) {
                             console.error(err);
-                            req.flash('error', 'Kesalahan dalam mengubah password');
+                            res.redirect('/profile?status=error&message=Eror%20saat%20merubah%20password!');
+
                         } else {
-                            req.flash('success', 'Password berhasil diubah');
-                        }
-                        res.redirect('/profile?status=success&message=Password%20berhasil%20diubah!');
-                        
+                            res.redirect('/profile?status=success&message=Password%20berhasil%20diubah!');
+                        }                        
                     });
                 } else {
                     connection.release(); // Melepaskan koneksi setelah selesai
-                    res.status(400).json({ error: 'Password lama tidak cocok' });
+                    res.redirect('/profile?status=error&message=Password%20lama%20tidak%20cocok!');
                 }
             });
         });
@@ -177,19 +176,19 @@ module.exports = {
                                         connection.rollback(function() {
                                             connection.release(); // Melepaskan koneksi setelah selesai
                                             console.error(err);
-                                            res.status(500).json({ error: 'Kesalahan dalam menyelesaikan transaksi' });
+                                            res.redirect('/profile?status=error&message=Kesalahan%20Server%20Terjadi!');
                                         });
                                         return;
                                     }
 
                                     connection.release(); // Melepaskan koneksi setelah selesai
                                     req.flash('success', 'Nama pengguna berhasil diubah');
-                                    res.redirect('/profile?status=success&message=Username%20berhasil%20diubah!');                                });
+                                    res.redirect('/login?status=success&message=Username%20berhasil%20diubah!');                                });
                             });
                         });
                     } else {
                         connection.release(); // Melepaskan koneksi setelah selesai
-                        res.status(400).json({ error: 'Password lama tidak cocok' });
+                        res.redirect('/profile?status=error&message=Password%20lama%20tidak%20cocok!');
                     }
                 });
             });

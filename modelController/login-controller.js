@@ -11,14 +11,11 @@ module.exports = {
     // Render tampilan untuk login yang ada didalam folder 'src/views/login.ejs'
     loginPage(req,res){
         res.render("login",{
-            colorFlash: req.flash('color'),
-            statusFlash: req.flash('status'),
-            pesanFlash: req.flash('message'),
         });
     },
     loginAuth(req, res) {
         const username = req.body.username;
-        const password = req.body.pass;
+        const password = req.body.password;
         const status = req.body.stats;
     
         if (username && password && status) {
@@ -32,7 +29,7 @@ module.exports = {
                     query = 'SELECT * FROM admin WHERE username = ? AND password = ?';
                 } else {
                     // Handle jika status tidak valid
-                    res.redirect('/login');
+                    res.redirect('/login?status=error&message=Statusmu%20tidak%20valid!');
                     return;
                 }
     
@@ -52,18 +49,15 @@ module.exports = {
     
                         // Redirect pengguna ke halaman yang sesuai berdasarkan status pengguna
                         if (user.status === 'ADMIN') {
-                            res.redirect('/admin');
+                            res.redirect('/admin?status=success&message=Selamat%20Datang,%20Admin!'); 
                         } else if (user.status === 'AKTIF') {
-                            res.redirect('/');
+                            res.redirect('/?status=success&message=Selamat%20Datang!'); 
                         } else {
                             // Handle jika status tidak valid
-                            res.redirect('/login');
+                            res.redirect('/login?status=error&message=Statusmu%20tidak%20valid!');
                         }
                     } else {
-                        req.flash('color', 'danger');
-                        req.flash('status', 'Oops..');
-                        req.flash('message', 'Akun tidak ditemukan');
-                        res.redirect('/login');
+                        res.redirect('/login?status=error&message=Akunmu%20tidak%Ditemukan!');
                     }
                 });
                 connection.release();
@@ -72,16 +66,4 @@ module.exports = {
             res.redirect('/login');
         }
     },        
-    // Fungsi untuk logout | Cara memanggilnya menggunakan url/rute 'http://localhost:5050/login/logout'
-    logout(req,res){
-        // Hapus sesi user dari broser
-        req.session.destroy((err) => {
-            if(err) {
-                return console.log(err);
-            }
-            // Hapus cokie yang masih tertinggal
-            res.clearCookie('secretname');
-            res.redirect('/login');
-        });
-    },
 }

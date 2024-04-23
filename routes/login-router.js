@@ -1,10 +1,8 @@
 const router = require('express').Router();
-const loginController = require('../modelController').login;
+const {login} = require('../modelController');
 const verifyUser = require('../middleware/verify');
-const {postValidationRules} = require("../middleware/POSTvalidation");
 
-router.get('/', verifyUser.isLogout, loginController.loginPage);
-router.get('/logout', loginController.logout);
-router.post('/auth', postValidationRules.isLoginPage(), loginController.loginAuth);
+router.get('/', verifyUser.isLogout, login.loginPage);
+router.post('/api/send-login', verifyUser.isLogout, login.loginAuth);
 
 module.exports = router;

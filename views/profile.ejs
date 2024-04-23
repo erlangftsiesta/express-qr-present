@@ -5,83 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile Page</title>
   <link rel="stylesheet" href="/css/styleOUT.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@5/dark.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <body>
-  <div class="flex min-h-screen bg-gray-100">
-    <div class="fixed top-0 left-0 w-full h-16 bg-white shadow-md flex items-center justify-between px-4">
-      <h1 class="text-xl font-medium">Your App Name</h1>
-      <ul class="flex space-x-4">
-        <li><a href="#" class="text-white hover:text-gray-800 bg-blue-500 px-4 py-2 text-lg font-bold rounded-lg">Home</a></li>
-        <li><a href="#" class="text-white hover:text-gray-800 bg-blue-500 px-4 py-2 text-lg font-bold rounded-lg">About</a></li>
-        <li><a href="#" class="text-white hover:text-gray-800 bg-blue-500 px-4 py-2 text-lg font-bold rounded-lg">Contact</a></li>
-      </ul>
+  <div class="flex min-h-screen bg-discordPallet1">
+    <div class="fixed top-0 left-0 w-full h-16 bg-discordPallet3 shadow-md flex items-center justify-between px-4">
+      <h1 class="font-semibold text-fontLogoColor hidden md:block">MyQR Presensi</h1>
+      <a href="/"><img src="/image/logo-MyQR-Presensi.png" alt="Profile" class="w-24 h-8 md:hidden"></a>
+      <a href="/"><img src="/svg/home.svg" alt="Profile" class="w-8 h-8"></a>
     </div>
 
     <div class="flex-grow px-4 pt-16 mt-16">
       <div class="flex flex-col mx-auto w-full md:w-1/2 lg:w-1/3">
-        <div class="flex flex-col bg-white shadow-md rounded-md overflow-hidden">
+        <div class="flex flex-col bg-discordPallet2 shadow-md rounded-md overflow-hidden">
           <div class="p-4 flex flex-col space-y-2">
-            <h2 class="text-xl font-medium text-gray-800">Welcome, <%= username %></h2>
-            <p class="text-gray-600">Nama: <%= nama_lengkap %></p>
-            <p class="text-gray-600">Kelas: <%= kelas %></p>
-            <p class="text-gray-600">Status: <%= status %></p>
+            <h2 class="text-xl font-medium text-gray-50">Selamat Datang <%= username %>!,</h2>
+            <h2 class="text-lg font-light text-gray-50 -mt-1">Bagaimana tentang hari ini?</h2>
+            <div class="bg-discordPallet1MediumDarker rounded-md">
+              <p class="text-gray-200 mb-2 ml-2"><b>Nama:</b> <%= nama_lengkap %></p> <!-- Memberikan margin bottom (mb) sebesar 2 -->
+              <p class="text-gray-200 mb-2 ml-2"><b>Kelas:</b> <%= kelas %></p> <!-- Memberikan margin bottom (mb) sebesar 2 -->
+              <p class="text-gray-200 mb-2 ml-2"><b>Status:</b> <%= status %></p> <!-- Memberikan margin bottom (mb) sebesar 2 -->          
+            </div>
           </div>
 
           <div class="flex flex-col space-y-2 p-4 border-t border-gray-200">
-            <a href="#" id="generateQR" class="w-full px-4 py-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-700">Generate Absensi QR</a>
-            <a href="#" id="generateChangePassword" class="w-full px-4 py-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-700">Ubah Password </a>
-            <a href="#" id="generateChangeUsername" class="w-full px-4 py-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-700">Ubah Username </a>
-            <a href="/login/logout" class="w-full px-4 py-2 text-center text-red-500 hover:text-red-700 underline">Logout</a>
+            <a href="#" id="generateQR" class="flex items-center justify-center w-full px-4 py-2 text-center text-white bg-green-500 rounded-md hover:bg-green-700">
+              <img src="/svg/qr.svg" alt="QR" class="w-6 h-6 mr-2">
+              Generate Absensi QR
+            </a>            
+            <a href="#" id="generateChangeUsername" class="flex items-center justify-center w-full px-4 py-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-700">
+              <img src="/svg/profile.svg" alt="QR" class="w-6 h-6 mr-2">
+              Ubah Username
+            </a>              
+            <a href="#" id="generateChangePassword" class="flex items-center justify-center w-full px-4 py-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-700">
+              <img src="/svg/password.svg" alt="QR" class="w-6 h-6 mr-2">
+              Ubah Password
+            </a>              
+            <a href="/logout/api/send-logout"class="flex items-center justify-center w-full px-4 py-2 text-center text-white bg-red-500 rounded-md hover:bg-red-700">
+              <img src="/svg/logout.svg" alt="QR" class="w-6 h-6 mr-2">
+              Logout
+            </a>           
           </div>
         </div>
       </div>
     </div>
 
-    <div class="fixed bottom-0 left-0 w-full h-12 bg-gray-200 flex items-center justify-center text-gray-500">
-      &copy; 2024 Your Company Name
+    <div class="fixed bottom-0 left-0 w-full h-12 bg-discordPallet1 flex items-center justify-center text-gray-500">
+      &copy; erlangftsiesta
     </div>
   </div>
 
   <!-- Modal for displaying QR code -->
   <div id="qrModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 hidden">
-    <div class="bg-white p-8 rounded-md max-w-md">
-      <img id="qrImage" src="" alt="QR Code" width="300" height="300">
-      <button id="closeModal" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">Close</button>
+    <div class="bg-discordPallet3 p-8 rounded-md max-w-md">
+      <img id="qrImage" src="" alt="QR Code" width="450" height="450" class="filter invert">
+      <button id="closeModal" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700">Close</button>
     </div>
   </div>
 
   <div id="changePasswordModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 hidden">
-    <div class="bg-white p-8 rounded-md max-w-lg">
+    <div class="bg-discordPallet3 p-8 rounded-md max-w-2xl">
       <form action="/api/send-change-password" method="POST">
-        <label for="username">Nama Pengguna</label> <br>
-        <input type="text" value="<%= username %>" name="username"> <br>
-        <label for="passwordLama">Password Sebelumnya</label> <br>
-        <input type="password" name="oldPassword"> <br>
-        <label for="passwordBaru">Password Baru</label> <br>
-        <input type="password" name="newPassword"><br>
-        <button id="submitChangePassword" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">Kirim</button>
+        <label class="text-white" for="username">Nama Pengguna</label> <br>
+        <input type="text" value="<%= username %>" name="username" class="w-full ml-2 mb-4 pl-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50"> <br>
+        <label class="text-white" for="passwordLama">Password Sebelumnya</label> <br>
+        <input type="password" name="oldPassword" class="w-full ml-2 mb-4 pl-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50"> <br>
+        <label class="text-white" for="passwordBaru">Password Baru</label> <br>
+        <input type="password" name="newPassword" class="w-full ml-2 mb-4 pl-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50"><br>
+        <button id="submitChangePassword" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 text-center w-full">Kirim</button>
       </form>
-      <button id="closeModalChangePassword" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700">Batalkan</button>
+      <button id="closeModalChangePassword" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700 text-center w-full">Batalkan</button>
     </div>
   </div>
 
   <div id="changeUsernameModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 hidden">
-    <div class="bg-white p-8 rounded-md max-w-lg">
+    <div class="bg-discordPallet3 p-8 rounded-md max-w-2xl">
       <form action="/api/send-change-username" method="POST">
-        <label for="usernameLama">Nama Pengguna</label> <br>
-        <input type="text" value="<%= username %>" name="oldUsername"> <br>
-        <label for="usernameBaru">Nama Pengguna Baru</label> <br>
-        <input type="text" name="newUsername"> <br>
-        <label for="password">Password</label> <br>
-        <input type="password" name="password"><br>
-        <button id="submitChangeUsername" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">Kirim</button>
-      </form>
-      <button id="closeModalChangeUsername" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700">Batalkan</button>
+        <label class="text-white" for="usernameLama">Nama Pengguna</label> <br>
+        <input type="text" value="<%= username %>" name="oldUsername" class="w-full ml-2 mb-4 pl-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50"> <br>
+        <label class="text-white" for="usernameBaru">Nama Pengguna Baru</label> <br>
+        <input type="text" name="newUsername" class="w-full ml-2 mb-4 pl-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50"> <br>
+        <label class="text-white" for="password">Password</label> <br>
+        <input type="password" name="password" class="w-full ml-2 mb-4 pl-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50"><br>
+        <button id="submitChangeUsername" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 text-center w-full">Kirim</button>
+    </form>    
+    <button id="closeModalChangeUsername" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700 text-center w-full">Batalkan</button>
     </div>
   </div>
 
   <script src="/js/qr.js"></script>
+  <script src="sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="/js/sweetalert2-changeData.js"></script>
   <script>
     // Function to generate QR code
     function generateQR(username, nama, kelas) {
@@ -96,8 +110,9 @@
       const qr = qrcode(typeNumber, errorCorrectionLevel);
       qr.addData(qrText);
       qr.make();
-      const qrDataUrl = qr.createDataURL(10); // Set the scale to 10 to ensure the QR code is clear
+      const qrDataUrl = qr.createDataURL(10, 0, 'image/png'); // Set the scale to 10 to ensure the QR code is clear
       document.getElementById('qrImage').src = qrDataUrl;
+
     }
 
     document.getElementById('generateQR').addEventListener('click', function() {
@@ -158,7 +173,24 @@
       document.getElementById('changeUsernameModal').classList.remove('hidden');
     });
     
+    function logout(){
+    fetch("/api/send-logout", {
+      method: "GET" // Atau "POST", tergantung pada konfigurasi server Anda
+    })
+    .then(response => {
+      if (response.ok) {
+        // Jika permintaan berhasil, arahkan pengguna kembali ke halaman login
+        window.location.href = '/login';
+      } else {
+      // Jika terjadi kesalahan, tampilkan pesan kesalahan atau tindakan yang sesuai
+      console.error("Gagal melakukan logout:", response.statusText);
+    }
+  })
+  .catch(error => {
+    console.error("Terjadi kesalahan:", error);
+  });
 
+    }
 
     document.getElementById('closeModal').addEventListener('click', function() {
       document.getElementById('qrModal').classList.add('hidden');
@@ -170,6 +202,5 @@
       document.getElementById('changeUsernameModal').classList.add('hidden');
     });
   </script>
-  <script src="/js/sweetalert2.js"></script>
 </body>
 </html>

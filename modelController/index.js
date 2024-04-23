@@ -5,6 +5,7 @@ const admin = require("./admin-controller");
 const login = require("./login-controller");
 const homepage = require("./homepage-controller");
 const profile = require("./profile-controller");
+const logout = require("./logout-controller")
 
 //assign variable ke dalam bentuk objek yang di export (harus ditulis berurutan)
 module.exports = {
@@ -12,4 +13,5 @@ module.exports = {
     login,
     homepage,
     profile,
+    logout
 }
